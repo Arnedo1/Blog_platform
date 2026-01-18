@@ -2,6 +2,7 @@ import type { BlogPost } from '../data/posts';
 import { FcLike } from 'react-icons/fc';
 import { LuMessageCircle } from 'react-icons/lu';
 import { FaRegBookmark } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 
 const BlogCard = ({ blog }: { blog: BlogPost }) => {
@@ -20,10 +21,12 @@ const BlogCard = ({ blog }: { blog: BlogPost }) => {
                     <div className='text-[12px]'>{blog.author.date}</div>
                 </div>
             </div>
-            <div className='font-bold text-lg my-2 '>{blog.title}</div>
+            <Link to={`/blogpost/${blog.id}`}>
+            <div className='font-bold hover:text-purple-900 cursor-pointer text-lg my-2 '>{blog.title}</div>
+            </Link>
             <div className='flex gap-4 mb-4 text-[14px] text-gray-500'>
                 {blog.tags.map((tag) => (
-                    <p>#{tag}</p>
+                    <p key={blog.id}>#{tag}</p>
                 ))}
             </div>
             <div className='flex justify-between gap-4'>
