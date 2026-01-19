@@ -6,7 +6,7 @@ const Header = () => {
         <div className='flex p-4 sticky top-0 bg-white justify-between px-4 shadow shadow-black/20'>
             <div className='flex gap-4'>
                 <div>
-                    <RxHamburgerMenu className=' mt-1 size-8 className="cursor-pointer"' />
+                    <RxHamburgerMenu className=' mt-1 h-8 w-6 className="cursor-pointer"' />
                 </div>
                 <div>
                     <Link to={'/'}>

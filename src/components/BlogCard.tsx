@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const BlogCard = ({ blog }: { blog: BlogPost }) => {
     return (
+        <Link to={`/blogpost/${blog.id}`}>
         <div className='shadow flex flex-col shadow-black/20 bg-white mb-3 mx-1 py-6 px-4'>
             <div className='flex gap-4'>
                 <div>
@@ -21,9 +22,9 @@ const BlogCard = ({ blog }: { blog: BlogPost }) => {
                     <div className='text-[12px]'>{blog.author.date}</div>
                 </div>
             </div>
-            <Link to={`/blogpost/${blog.id}`}>
+            
             <div className='font-bold hover:text-purple-900 cursor-pointer text-lg my-2 '>{blog.title}</div>
-            </Link>
+          
             <div className='flex gap-4 mb-4 text-[14px] text-gray-500'>
                 {blog.tags.map((tag) => (
                     <p key={blog.id}>#{tag}</p>
@@ -53,6 +54,7 @@ const BlogCard = ({ blog }: { blog: BlogPost }) => {
                 </div>
             </div>
         </div>
+        </Link>
     );
 };
 

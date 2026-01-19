@@ -3,6 +3,7 @@ import { blogPosts } from '../data/posts';
 import { FcLike } from 'react-icons/fc';
 import { LuMessageCircle } from 'react-icons/lu';
 import Header from '../components/Header';
+import Comments from '../components/CommentList';
 
 const BlogPostPage = () => {
     const { id } = useParams();
@@ -57,6 +58,7 @@ const BlogPostPage = () => {
                     <p>{blog.content}</p>
                 </div>
             </div>
+            <Comments blog={blog}/>
         </div>
     );
 };

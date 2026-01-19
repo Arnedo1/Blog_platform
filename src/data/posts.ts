@@ -3,7 +3,7 @@ export interface Author {
     name: string;
     avatar: string;
     bio: string;
-    date:string;
+    date: string;
   }
   
   export interface Comment {
@@ -11,6 +11,7 @@ export interface Author {
     author: string;
     content: string;
     date: string;
+    avatar: string;
   }
   
   export interface BlogPost {
@@ -84,6 +85,7 @@ export interface Author {
         {
           id: 1,
           author: "Tech Enthusiast",
+          avatar: "https://i.pravatar.cc/150?img=20",
           content: "Excellent breakdown of LLM architecture!",
           date: "2025-01-17"
         }
@@ -121,6 +123,7 @@ export interface Author {
         {
           id: 2,
           author: "Vision Dev",
+          avatar: "https://i.pravatar.cc/150?img=21",
           content: "Great overview of recent advances!",
           date: "2025-01-16"
         }
@@ -143,12 +146,14 @@ export interface Author {
         {
           id: 3,
           author: "ML Learner",
+          avatar: "https://i.pravatar.cc/150?img=22",
           content: "This tutorial was exactly what I needed!",
           date: "2025-01-15"
         },
         {
           id: 4,
           author: "Code Newbie",
+          avatar: "https://i.pravatar.cc/150?img=23",
           content: "Clear explanations, thank you!",
           date: "2025-01-15"
         }
@@ -186,6 +191,7 @@ export interface Author {
         {
           id: 5,
           author: "Doctor Mike",
+          avatar: "https://i.pravatar.cc/150?img=24",
           content: "Fascinating applications in radiology!",
           date: "2025-01-13"
         }
@@ -223,12 +229,14 @@ export interface Author {
         {
           id: 6,
           author: "Artist Alex",
+          avatar: "https://i.pravatar.cc/150?img=25",
           content: "AI art is changing everything!",
           date: "2025-01-11"
         },
         {
           id: 7,
           author: "Creative Coder",
+          avatar: "https://i.pravatar.cc/150?img=26",
           content: "Love the examples you provided.",
           date: "2025-01-11"
         }
@@ -266,6 +274,7 @@ export interface Author {
         {
           id: 8,
           author: "Policy Maker",
+          avatar: "https://i.pravatar.cc/150?img=27",
           content: "Critical for regulatory compliance!",
           date: "2025-01-09"
         }
@@ -303,6 +312,7 @@ export interface Author {
         {
           id: 9,
           author: "Safety Researcher",
+          avatar: "https://i.pravatar.cc/150?img=28",
           content: "Important considerations for the field.",
           date: "2025-01-07"
         }
@@ -340,12 +350,14 @@ export interface Author {
         {
           id: 10,
           author: "Auto Engineer",
+          avatar: "https://i.pravatar.cc/150?img=29",
           content: "Great overview of the tech stack!",
           date: "2025-01-05"
         },
         {
           id: 11,
           author: "Safety First",
+          avatar: "https://i.pravatar.cc/150?img=30",
           content: "What about safety considerations?",
           date: "2025-01-05"
         }
@@ -383,6 +395,7 @@ export interface Author {
         {
           id: 12,
           author: "GAN Enthusiast",
+          avatar: "https://i.pravatar.cc/150?img=31",
           content: "StyleGAN examples are amazing!",
           date: "2025-01-03"
         }
@@ -420,6 +433,7 @@ export interface Author {
         {
           id: 13,
           author: "AI Researcher",
+          avatar: "https://i.pravatar.cc/150?img=32",
           content: "The future is multimodal!",
           date: "2025-01-01"
         }
@@ -457,6 +471,7 @@ export interface Author {
         {
           id: 14,
           author: "Climate Scientist",
+          avatar: "https://i.pravatar.cc/150?img=33",
           content: "AI is crucial for climate research!",
           date: "2024-12-30"
         }
@@ -494,6 +509,7 @@ export interface Author {
         {
           id: 15,
           author: "Bot Builder",
+          avatar: "https://i.pravatar.cc/150?img=34",
           content: "Helpful tips for dialogue management!",
           date: "2024-12-28"
         }
@@ -531,6 +547,7 @@ export interface Author {
         {
           id: 16,
           author: "ML Practitioner",
+          avatar: "https://i.pravatar.cc/150?img=35",
           content: "Game-changer for small datasets!",
           date: "2024-12-26"
         }
@@ -568,6 +585,7 @@ export interface Author {
         {
           id: 17,
           author: "Deep Learning Fan",
+          avatar: "https://i.pravatar.cc/150?img=36",
           content: "SimCLR results are impressive!",
           date: "2024-12-24"
         }
@@ -605,12 +623,14 @@ export interface Author {
         {
           id: 18,
           author: "Ethics Advocate",
+          avatar: "https://i.pravatar.cc/150?img=37",
           content: "Essential reading for AI practitioners!",
           date: "2024-12-22"
         },
         {
           id: 19,
           author: "Data Scientist",
+          avatar: "https://i.pravatar.cc/150?img=38",
           content: "Practical advice on bias testing.",
           date: "2024-12-22"
         }
@@ -648,6 +668,7 @@ export interface Author {
         {
           id: 20,
           author: "Quant Trader",
+          avatar: "https://i.pravatar.cc/150?img=39",
           content: "ML models for trading are fascinating!",
           date: "2024-12-20"
         }
@@ -685,6 +706,7 @@ export interface Author {
         {
           id: 21,
           author: "Mobile Dev",
+          avatar: "https://i.pravatar.cc/150?img=40",
           content: "Perfect for mobile deployment!",
           date: "2024-12-18"
         }
@@ -722,6 +744,7 @@ export interface Author {
         {
           id: 22,
           author: "Farm Tech",
+          avatar: "https://i.pravatar.cc/150?img=41",
           content: "AI is changing how we farm!",
           date: "2024-12-16"
         }
@@ -759,12 +782,14 @@ export interface Author {
         {
           id: 23,
           author: "Prompt Master",
+          avatar: "https://i.pravatar.cc/150?img=42",
           content: "These techniques really work!",
           date: "2024-12-14"
         },
         {
           id: 24,
           author: "AI User",
+          avatar: "https://i.pravatar.cc/150?img=43",
           content: "Improved my results dramatically.",
           date: "2024-12-14"
         }
@@ -802,6 +827,7 @@ export interface Author {
         {
           id: 25,
           author: "Music Producer",
+          avatar: "https://i.pravatar.cc/150?img=44",
           content: "AI is a creative tool, not a replacement!",
           date: "2024-12-12"
         }
@@ -839,6 +865,7 @@ export interface Author {
         {
           id: 26,
           author: "Robotics Engineer",
+          avatar: "https://i.pravatar.cc/150?img=45",
           content: "Exciting times for robotics!",
           date: "2024-12-10"
         }
@@ -876,12 +903,14 @@ export interface Author {
         {
           id: 27,
           author: "Developer Dave",
+          avatar: "https://i.pravatar.cc/150?img=46",
           content: "Copilot saves me so much time!",
           date: "2024-12-08"
         },
         {
           id: 28,
           author: "Code Reviewer",
+          avatar: "https://i.pravatar.cc/150?img=47",
           content: "Still need to review AI-generated code carefully.",
           date: "2024-12-08"
         }
@@ -919,6 +948,7 @@ export interface Author {
         {
           id: 29,
           author: "Teacher Tom",
+          avatar: "https://i.pravatar.cc/150?img=48",
           content: "AI tutors complement human teachers!",
           date: "2024-12-06"
         }
@@ -956,6 +986,7 @@ export interface Author {
         {
           id: 30,
           author: "Ethics Researcher",
+          avatar: "https://i.pravatar.cc/150?img=49",
           content: "Important lessons for the industry.",
           date: "2024-12-04"
         }
@@ -993,6 +1024,7 @@ export interface Author {
         {
           id: 31,
           author: "ML Engineer",
+          avatar: "https://i.pravatar.cc/150?img=50",
           content: "Practical advice for real deployments!",
           date: "2024-12-02"
         }
@@ -1030,12 +1062,14 @@ export interface Author {
         {
           id: 32,
           author: "Futurist",
+          avatar: "https://i.pravatar.cc/150?img=51",
           content: "Exciting and thought-provoking!",
           date: "2024-11-30"
         },
         {
           id: 33,
           author: "Skeptical Sam",
+          avatar: "https://i.pravatar.cc/150?img=52",
           content: "Let's see if these predictions hold up.",
           date: "2024-12-01"
         }
