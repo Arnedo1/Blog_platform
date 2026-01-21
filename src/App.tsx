@@ -1,6 +1,7 @@
 import BlogPostPage from './pages/BlogPostPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import Register from './components/Register';
 
 const App = () => {
 
@@ -14,6 +15,10 @@ const App = () => {
                 <Route
                     path='/blogpost/:id'
                     element={<BlogPostPage />}
+                />
+                <Route
+                    path='/registreren'
+                    element={<Register />}
                 />
             </Routes>
         </BrowserRouter>
