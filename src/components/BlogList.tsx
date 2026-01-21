@@ -2,10 +2,15 @@ import TopFilter from './TopFilter';
 import { blogPosts } from '../data/posts';
 import BlogCard from './BlogCard';
 
-const BlogList = () => {
+interface BlogListProps{
+    setTopFilter:(value:string)=>void
+    topFilter:string
+}
+
+const BlogList = (props:BlogListProps) => {
     return (
         <div className='bg-gray-100'>
-            <TopFilter />
+            <TopFilter setTopFilter={props.setTopFilter} topFilter={props.topFilter}/>
             {blogPosts.map((blog)=> <BlogCard key={blog.id} blog={blog}/>)}
         </div>
     );

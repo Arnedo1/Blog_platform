@@ -10,7 +10,7 @@ const CommentList = ({blog} : {blog : BlogPost}) => {
                 <div className="text-xl font-semibold">Reacties<span className="ml-1">({blog.comments.length})</span></div>
                 <button className="px-6 py-2 rounded font-light shadow shadow-black/20 ">Wordt lid</button>
             </div>
-            <div className="flex px-4 mt-4 gap-2 items-start">
+            <div className="flex px-4 my-4 gap-2 items-start">
             <img
                             src={blog.author.avatar}
                             alt='Logo'

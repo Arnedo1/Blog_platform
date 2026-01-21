@@ -5,7 +5,7 @@ import { LuMessageCircle } from 'react-icons/lu';
 
 const CommentCard = ({ comment }: { comment: Comment }) => {
     return (
-        <div className='p-4 flex gap-2 mt-4'>
+        <div className='p-4 flex gap-2 '>
             <div>
                 {comment.avatar ? (
                     <img

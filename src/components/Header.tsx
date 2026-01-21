@@ -11,9 +11,9 @@ const Header = () => {
                 <div>
                     <Link to={'/'}>
                         <img
-                            src='/logo.svg'
+                            src='./logo.svg'
                             alt='Logo'
-                            className='w-35 h-10 className="cursor-pointer"'
+                            className='w-35 h-10 cursor-pointer'
                         />
                     </Link>
                 </div>
