@@ -1,9 +1,23 @@
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+interface User {
+    name?: string;
+    usersName?: string;
+    email?: string;
+    avatar?:string
+}
+
+interface HeaderProps {
+    setCurrentUser: (value: User | null) => void;
+    currentUser: User | null;
+    userModal: boolean;
+    setUserModal: (value: boolean) => void;
+}
+
+const Header = (props: HeaderProps) => {
     return (
-        <div className='flex p-4 sticky top-0 bg-white justify-between px-4 shadow shadow-black/20'>
+        <div className='flex p-4 fixed w-full top-0 z-20 bg-white justify-between px-4 shadow shadow-black/20'>
             <div className='flex gap-4'>
                 <div>
                     <RxHamburgerMenu className=' mt-1 h-8 w-6 cursor-pointer' />
@@ -20,11 +34,18 @@ const Header = () => {
             </div>
 
             <div>
-                <Link to={'/registreren'}>
-                <button className='border border-black text-black cursor-pointer py-1 px-4 mt-1 rounded-sm'>
-                    Registreer
-                </button>
-                </Link>
+                {props.currentUser && props.currentUser.avatar ?(
+                    <div 
+                    onClick={()=>props.setUserModal(!props.userModal)}
+                    className='size-10 flex justify-center items-center bg-gray-200 rounded-full'><img
+                    className='size-8 cursor-pointer' src={props.currentUser.avatar} alt="" /></div>
+                ) : (
+                    <Link to={'/registreren'}>
+                        <button className='border border-black text-black cursor-pointer py-1 px-4 mt-1 rounded-sm'>
+                            Registreer
+                        </button>
+                    </Link>
+                )}
             </div>
         </div>
     );

@@ -4,8 +4,23 @@ import { FcLike } from 'react-icons/fc';
 import { LuMessageCircle } from 'react-icons/lu';
 import Header from '../components/Header';
 import Comments from '../components/CommentList';
+import UsersModal from '../components/UsersModal';
 
-const BlogPostPage = () => {
+interface User {
+    name?: string;
+    usersName?: string;
+    email?: string;
+    avatar?: string;
+}
+
+interface BlogPostProps {
+    setCurrentUser: (value: User | null) => void;
+    currentUser: User | null;
+    userModal: boolean;
+    setUserModal: (value: boolean) => void;
+}
+
+const BlogPostPage = (props: BlogPostProps) => {
     const { id } = useParams();
     const blog = blogPosts.find((post) => post.id === Number(id));
 
@@ -15,9 +30,22 @@ const BlogPostPage = () => {
 
     return (
         <div>
-            <Header />
-
-            <div className='p-4'>
+            <div className='fixed top-0'>
+                <Header
+                    setCurrentUser={props.setCurrentUser}
+                    currentUser={props.currentUser}
+                    userModal={props.userModal}
+                    setUserModal={props.setUserModal}
+                />
+            </div>
+            <div className='relative mt-18'>
+                {props.userModal && (
+                    <div className='sticky'>
+                        <UsersModal />
+                    </div>
+                )}
+            </div>
+            <div className='p-4 '>
                 <div className='flex gap-4'>
                     <div>
                         <img
@@ -29,7 +57,9 @@ const BlogPostPage = () => {
                     <div>
                         <div>{blog.author.name}</div>
                         <div className='text-[12px] flex gap-1'>
-                        <p>Posted</p>{blog.date}</div>
+                            <p>Posted</p>
+                            {blog.date}
+                        </div>
                     </div>
                 </div>
 
@@ -58,7 +88,7 @@ const BlogPostPage = () => {
                     <p>{blog.content}</p>
                 </div>
             </div>
-            <Comments blog={blog}/>
+            <Comments blog={blog} />
         </div>
     );
 };
