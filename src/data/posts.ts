@@ -20,7 +20,7 @@ export interface Author {
     avatar?: string;
 }
 export interface UserArrayData {
-    id: string;
+    id: number;
     likes?: number;
     posts?: BlogPost[];
     name?: string;

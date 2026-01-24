@@ -2,16 +2,14 @@ import { useState } from 'react';
 import BlogList from '../components/BlogList';
 import Header from '../components/Header';
 import UsersModal from '../components/UsersModal';
-import type { User, UserArrayData} from '../data/posts'
-
+import type { User } from '../data/posts';
 
 interface HomePageProps {
     setCurrentUser: (value: User | null) => void;
     currentUser: User | null;
     userModal: boolean;
     setUserModal: (value: boolean) => void;
-    userArray:UserArrayData[]
-    setUserArray:(value: UserArrayData[])=>void
+   
 }
 
 const HomePage = (props: HomePageProps) => {
@@ -27,9 +25,12 @@ const HomePage = (props: HomePageProps) => {
                     setUserModal={props.setUserModal}
                 />
                 <div className='relative mt-18'>
-                    {props.userModal && (
+                    {props.userModal && props.currentUser !== null && (
                         <div className='fixed'>
-                            <UsersModal />
+                            <UsersModal 
+                            setCurrentUser={props.setCurrentUser}
+                            currentUser={props.currentUser}
+                            />
                         </div>
                     )}
                     <BlogList
@@ -37,6 +38,7 @@ const HomePage = (props: HomePageProps) => {
                         setTopFilter={setTopFilter}
                         userModal={props.userModal}
                         setUserModal={props.setUserModal}
+                    
                     />
                 </div>
             </div>

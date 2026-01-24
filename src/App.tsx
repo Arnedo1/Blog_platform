@@ -28,8 +28,7 @@ const App = () => {
                             currentUser={currentUser}
                             userModal={userModal}
                             setUserModal={setUserModal}
-                            userArray={userArray}
-                            setUserArray={setUserArray}
+                    
                         />
                     }
                 />
@@ -52,6 +51,8 @@ const App = () => {
                             currentUser={currentUser}
                             userModal={userModal}
                             setUserModal={setUserModal}
+                            userArray={userArray}
+                            setUserArray={setUserArray}
                         />
                     }
                 />

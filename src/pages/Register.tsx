@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router';
 import { IoMdClose } from 'react-icons/io'
+import type { UserArrayData } from '../data/posts';
+
 
 interface FormErrors {
     avatar?: string;
@@ -23,6 +25,8 @@ interface RegisterProps {
     currentUser: User |null;
     userModal:boolean
     setUserModal:(value:boolean)=>void
+    userArray: UserArrayData[];
+    setUserArray: (value: UserArrayData[]) => void;
 }
 
 const Register = (props: RegisterProps) => {
@@ -62,8 +66,8 @@ const Register = (props: RegisterProps) => {
 
     const submitForm = () => {
         if (validate()) {
-            props.setCurrentUser({ avatar,name, usersName, email });
-            console.log({ avatar, name, usersName, email });
+            props.setUserArray([...props.userArray, {id:Date.now(), avatar, name, usersName, email, likes: 0, posts:[]}])
+            props.setCurrentUser({avatar, name, usersName, email})
             setName('');
             setUsersName('');
             setEmail('');
@@ -82,7 +86,7 @@ const Register = (props: RegisterProps) => {
                 userModal={props.userModal}
                     setUserModal={props.setUserModal}
             />
-            <div className='p-4'>
+            <div className='p-4 mt-18'>
                 <div className='flex justify-between items-center'>
                     <div className='text-xl font-bold mb-7'>
                         Maak je account
@@ -140,7 +144,7 @@ const Register = (props: RegisterProps) => {
                         <div
                             onClick={() => setAvatar('https://api.dicebear.com/7.x/avataaars/svg?seed=4')}
                             className={
-                                avatar === 'ttps://api.dicebear.com/7.x/avataaars/svg?seed=4'
+                                avatar === 'https://api.dicebear.com/7.x/avataaars/svg?seed=4'
                                     ? 'rounded-md size-12 bg-gray-200'
                                     : 'rounded-md size-12 bg-white'
                             }>
