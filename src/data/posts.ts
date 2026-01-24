@@ -13,6 +13,21 @@ export interface Author {
     date: string;
     avatar: string;
   }
+  export interface User {
+    name?: string;
+    usersName?: string;
+    email?: string;
+    avatar?: string;
+}
+export interface UserArrayData {
+    id: string;
+    likes?: number;
+    posts?: BlogPost[];
+    name?: string;
+    usersName?: string;
+    email?: string;
+    avatar?: string;
+  }
   
   export interface BlogPost {
     id: number;

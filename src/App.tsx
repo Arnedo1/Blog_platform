@@ -3,16 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Register from './pages/Register';
 import { useEffect, useState } from 'react';
-
-interface User {
-    name?: string;
-    usersName?: string;
-    email?: string;
-    avatar?: string;
-}
+import type { User, UserArrayData} from './data/posts'
 
 const App = () => {
     const [userModal, setUserModal] = useState<boolean>(false);
+    const [userArray, setUserArray] = useState<UserArrayData[]>([])
     const [currentUser, setCurrentUser] = useState<User | null>(() => {
         const saved = localStorage.getItem('currentUser');
         return saved ? JSON.parse(saved) : null;
@@ -33,6 +28,8 @@ const App = () => {
                             currentUser={currentUser}
                             userModal={userModal}
                             setUserModal={setUserModal}
+                            userArray={userArray}
+                            setUserArray={setUserArray}
                         />
                     }
                 />
