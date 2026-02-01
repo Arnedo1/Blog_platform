@@ -9,7 +9,9 @@ const App = () => {
     const [userModal, setUserModal] = useState<boolean>(false);
     const [menuModal, setMenuModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
-    const [userArray, setUserArray] = useState<UserArrayData[]>([])
+    const [userArray, setUserArray] = useState<UserArrayData[]>(()=> {
+      const saved = localStorage.getItem('userArray')
+      return saved ? JSON.parse(saved) : []})
     const [currentUser, setCurrentUser] = useState<User | null>(() => {
         const saved = localStorage.getItem('currentUser');
         return saved ? JSON.parse(saved) : null;
@@ -18,6 +20,9 @@ const App = () => {
     useEffect(() => {
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
     }, [currentUser]);
+    useEffect(() => {
+      localStorage.setItem('userArray', JSON.stringify(userArray));
+  }, [userArray]);
 
     return (
         <BrowserRouter basename='/Blog_platform'>
@@ -34,6 +39,7 @@ const App = () => {
                             setMenuModal={setMenuModal}
                             loginModal={loginModal}
                             setLoginModal={setLoginModal}
+                            userArray={userArray}
                         />
                     }
                 />
@@ -47,6 +53,7 @@ const App = () => {
                             setUserModal={setUserModal}
                             menuModal={menuModal}
                             setMenuModal={setMenuModal}
+                            userArray={userArray}
                         />
                     }
                 />

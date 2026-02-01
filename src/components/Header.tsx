@@ -1,5 +1,7 @@
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
+import type { UserArrayData } from '../data/posts';
+
 
 interface User {
     name?: string;
@@ -15,6 +17,7 @@ interface HeaderProps {
     setUserModal: (value: boolean) => void;
     menuModal: boolean;
     setMenuModal: (value: boolean) => void;
+    userArray: UserArrayData[];
     
 }
 
@@ -24,7 +27,7 @@ const Header = (props: HeaderProps) => {
             <div className='flex gap-4'>
                 <div>
                     <RxHamburgerMenu 
-                    onClick={()=>props.setMenuModal(!props.menuModal)}
+                    onClick={()=>props.setMenuModal(true)}
                     className=' mt-1 h-8 w-6 cursor-pointer' />
                 </div>
                 <div>

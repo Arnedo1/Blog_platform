@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router';
 import { IoMdClose } from 'react-icons/io';
@@ -43,6 +43,9 @@ const Register = (props: RegisterProps) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState<FormErrors>({});
 
+    const nameExist = props.userArray.find((users)=> users.usersName === usersName)
+    const emailExist = props.userArray.find((users)=> users.email === email)
+
     const validate = () => {
         const newErrors: FormErrors = {};
         if (!name.trim()) {
@@ -51,8 +54,14 @@ const Register = (props: RegisterProps) => {
         if (!emailRegex.test(email)) {
             newErrors.email = 'Ongeldige email';
         }
+        if (emailExist) {
+            newErrors.email = 'Email bestaat al';
+        }
         if (!usersName.trim()) {
             newErrors.usersName = 'Usersname is verplicht';
+        }
+        if (nameExist) {
+            newErrors.usersName = 'Usersname bestaat al';
         }
         if (!passwordRegex.test(password)) {
             newErrors.password = '8 karakters, 1 hoofdletter en 1 teken';
@@ -60,6 +69,7 @@ const Register = (props: RegisterProps) => {
         if (password !== confirmPassword) {
             newErrors.confirmPassword = 'paswoord komt niet overeen';
         }
+
 
         setError(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -89,6 +99,10 @@ const Register = (props: RegisterProps) => {
             navigate(-1);
         }
     };
+    useEffect(() => {
+   console.log(props.userArray)
+    }, [props.userArray])
+    
 
     return (
         <div>
@@ -99,6 +113,7 @@ const Register = (props: RegisterProps) => {
                 setUserModal={props.setUserModal}
                 menuModal={props.menuModal}
                 setMenuModal={props.setMenuModal}
+                userArray={props.userArray}
             />
             <div className='p-4 mt-18'>
                 <div className='flex justify-between items-center'>

@@ -5,6 +5,7 @@ import UsersModal from '../components/UsersModal';
 import type { User } from '../data/posts';
 import MenuModal from '../components/MenuModal';
 import LoginModal from '../components/LoginModal';
+import type { UserArrayData } from '../data/posts';
 
 interface HomePageProps {
     setCurrentUser: (value: User | null) => void;
@@ -15,6 +16,7 @@ interface HomePageProps {
     setUserModal: (value: boolean) => void;
     loginModal: boolean;
     setLoginModal: (value: boolean) => void;
+    userArray: UserArrayData[];
 }
 
 const HomePage = (props: HomePageProps) => {
@@ -30,6 +32,7 @@ const HomePage = (props: HomePageProps) => {
                     setUserModal={props.setUserModal}
                     menuModal={props.menuModal}
                     setMenuModal={props.setMenuModal}
+                    userArray={props.userArray}
                 />
                 <div className='relative mt-18'>
                     {props.userModal &&
@@ -49,6 +52,8 @@ const HomePage = (props: HomePageProps) => {
                                 setLoginModal={props.setLoginModal}
                                 setMenuModal={props.setMenuModal}
                                 menuModal={props.menuModal}
+                                setCurrentUser={props.setCurrentUser}
+                                currentUser={props.currentUser}
                             />
                         </div>
                     )}
@@ -57,6 +62,9 @@ const HomePage = (props: HomePageProps) => {
                             <LoginModal
                                 loginModal={props.loginModal}
                                 setLoginModal={props.setLoginModal}
+                                userArray={props.userArray}
+                                setCurrentUser={props.setCurrentUser}
+                                currentUser={props.currentUser}
                             />
                         </div>
                     )}

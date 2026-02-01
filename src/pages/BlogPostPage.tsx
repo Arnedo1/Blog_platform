@@ -5,6 +5,7 @@ import { LuMessageCircle } from 'react-icons/lu';
 import Header from '../components/Header';
 import Comments from '../components/CommentList';
 import UsersModal from '../components/UsersModal';
+import type { UserArrayData } from '../data/posts';
 
 interface User {
     name?: string;
@@ -20,7 +21,7 @@ interface BlogPostProps {
     setUserModal: (value: boolean) => void;
     menuModal: boolean;
     setMenuModal: (value: boolean) => void;
-
+    userArray: UserArrayData[];
 }
 
 const BlogPostPage = (props: BlogPostProps) => {
@@ -41,7 +42,7 @@ const BlogPostPage = (props: BlogPostProps) => {
                     setUserModal={props.setUserModal}
                     menuModal={props.menuModal}
                     setMenuModal={props.setMenuModal}
-
+                    userArray={props.userArray}
                 />
             </div>
             <div className='relative mt-18'>
