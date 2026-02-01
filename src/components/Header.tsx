@@ -13,6 +13,9 @@ interface HeaderProps {
     currentUser: User | null;
     userModal: boolean;
     setUserModal: (value: boolean) => void;
+    menuModal: boolean;
+    setMenuModal: (value: boolean) => void;
+    
 }
 
 const Header = (props: HeaderProps) => {
@@ -20,7 +23,9 @@ const Header = (props: HeaderProps) => {
         <div className='flex p-4 fixed w-full top-0 z-20 bg-white justify-between px-4 shadow shadow-black/20'>
             <div className='flex gap-4'>
                 <div>
-                    <RxHamburgerMenu className=' mt-1 h-8 w-6 cursor-pointer' />
+                    <RxHamburgerMenu 
+                    onClick={()=>props.setMenuModal(!props.menuModal)}
+                    className=' mt-1 h-8 w-6 cursor-pointer' />
                 </div>
                 <div>
                     <Link to={'/'}>

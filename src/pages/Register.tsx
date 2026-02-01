@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router';
-import { IoMdClose } from 'react-icons/io'
+import { IoMdClose } from 'react-icons/io';
 import type { UserArrayData } from '../data/posts';
-
 
 interface FormErrors {
     avatar?: string;
@@ -22,11 +21,13 @@ interface User {
 
 interface RegisterProps {
     setCurrentUser: (value: User | null) => void;
-    currentUser: User |null;
-    userModal:boolean
-    setUserModal:(value:boolean)=>void
+    currentUser: User | null;
+    userModal: boolean;
+    setUserModal: (value: boolean) => void;
     userArray: UserArrayData[];
     setUserArray: (value: UserArrayData[]) => void;
+    menuModal: boolean;
+    setMenuModal: (value: boolean) => void;
 }
 
 const Register = (props: RegisterProps) => {
@@ -66,8 +67,19 @@ const Register = (props: RegisterProps) => {
 
     const submitForm = () => {
         if (validate()) {
-            props.setUserArray([...props.userArray, {id:Date.now(), avatar, name, usersName, email, likes: 0, posts:[]}])
-            props.setCurrentUser({avatar, name, usersName, email})
+            props.setUserArray([
+                ...props.userArray,
+                {
+                    id: Date.now(),
+                    avatar,
+                    name,
+                    usersName,
+                    email,
+                    likes: 0,
+                    posts: [],
+                },
+            ]);
+            props.setCurrentUser({ avatar, name, usersName, email });
             setName('');
             setUsersName('');
             setEmail('');
@@ -84,7 +96,9 @@ const Register = (props: RegisterProps) => {
                 setCurrentUser={props.setCurrentUser}
                 currentUser={props.currentUser}
                 userModal={props.userModal}
-                    setUserModal={props.setUserModal}
+                setUserModal={props.setUserModal}
+                menuModal={props.menuModal}
+                setMenuModal={props.setMenuModal}
             />
             <div className='p-4 mt-18'>
                 <div className='flex justify-between items-center'>
@@ -103,9 +117,14 @@ const Register = (props: RegisterProps) => {
                     <div className='mb-3 '>Kies een standaard avatar</div>
                     <div className='flex gap-4 border mb-4 border-gray-200 rounded-sm py-3 px-5'>
                         <div
-                            onClick={() => setAvatar('https://api.dicebear.com/7.x/avataaars/svg?seed=1')}
+                            onClick={() =>
+                                setAvatar(
+                                    'https://api.dicebear.com/7.x/avataaars/svg?seed=1'
+                                )
+                            }
                             className={
-                                avatar === 'https://api.dicebear.com/7.x/avataaars/svg?seed=1'
+                                avatar ===
+                                'https://api.dicebear.com/7.x/avataaars/svg?seed=1'
                                     ? 'rounded-md size-12 bg-gray-200'
                                     : 'rounded-md size-12 bg-white'
                             }>
@@ -116,9 +135,14 @@ const Register = (props: RegisterProps) => {
                             />
                         </div>
                         <div
-                            onClick={() => setAvatar('https://api.dicebear.com/7.x/avataaars/svg?seed=2')}
+                            onClick={() =>
+                                setAvatar(
+                                    'https://api.dicebear.com/7.x/avataaars/svg?seed=2'
+                                )
+                            }
                             className={
-                                avatar === 'https://api.dicebear.com/7.x/avataaars/svg?seed=2'
+                                avatar ===
+                                'https://api.dicebear.com/7.x/avataaars/svg?seed=2'
                                     ? 'rounded-md size-12 bg-gray-200'
                                     : 'rounded-md size-12 bg-white'
                             }>
@@ -129,9 +153,14 @@ const Register = (props: RegisterProps) => {
                             />
                         </div>
                         <div
-                            onClick={() => setAvatar('https://api.dicebear.com/7.x/avataaars/svg?seed=3')}
+                            onClick={() =>
+                                setAvatar(
+                                    'https://api.dicebear.com/7.x/avataaars/svg?seed=3'
+                                )
+                            }
                             className={
-                                avatar === 'https://api.dicebear.com/7.x/avataaars/svg?seed=3'
+                                avatar ===
+                                'https://api.dicebear.com/7.x/avataaars/svg?seed=3'
                                     ? 'rounded-md size-12 bg-gray-200'
                                     : 'rounded-md size-12 bg-white'
                             }>
@@ -142,9 +171,14 @@ const Register = (props: RegisterProps) => {
                             />
                         </div>
                         <div
-                            onClick={() => setAvatar('https://api.dicebear.com/7.x/avataaars/svg?seed=4')}
+                            onClick={() =>
+                                setAvatar(
+                                    'https://api.dicebear.com/7.x/avataaars/svg?seed=4'
+                                )
+                            }
                             className={
-                                avatar === 'https://api.dicebear.com/7.x/avataaars/svg?seed=4'
+                                avatar ===
+                                'https://api.dicebear.com/7.x/avataaars/svg?seed=4'
                                     ? 'rounded-md size-12 bg-gray-200'
                                     : 'rounded-md size-12 bg-white'
                             }>
@@ -155,9 +189,14 @@ const Register = (props: RegisterProps) => {
                             />
                         </div>
                         <div
-                            onClick={() => setAvatar('https://api.dicebear.com/7.x/avataaars/svg?seed=5')}
+                            onClick={() =>
+                                setAvatar(
+                                    'https://api.dicebear.com/7.x/avataaars/svg?seed=5'
+                                )
+                            }
                             className={
-                                avatar === 'https://api.dicebear.com/7.x/avataaars/svg?seed=5'
+                                avatar ===
+                                'https://api.dicebear.com/7.x/avataaars/svg?seed=5'
                                     ? 'rounded-md size-12 bg-gray-200'
                                     : 'rounded-md size-12 bg-white'
                             }>
@@ -168,9 +207,14 @@ const Register = (props: RegisterProps) => {
                             />
                         </div>
                         <div
-                            onClick={() => setAvatar('https://api.dicebear.com/7.x/avataaars/svg?seed=6')}
+                            onClick={() =>
+                                setAvatar(
+                                    'https://api.dicebear.com/7.x/avataaars/svg?seed=6'
+                                )
+                            }
                             className={
-                                avatar === 'https://api.dicebear.com/7.x/avataaars/svg?seed=6'
+                                avatar ===
+                                'https://api.dicebear.com/7.x/avataaars/svg?seed=6'
                                     ? 'rounded-md size-12 bg-gray-200'
                                     : 'rounded-md size-12 bg-white'
                             }>

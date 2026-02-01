@@ -18,6 +18,9 @@ interface BlogPostProps {
     currentUser: User | null;
     userModal: boolean;
     setUserModal: (value: boolean) => void;
+    menuModal: boolean;
+    setMenuModal: (value: boolean) => void;
+
 }
 
 const BlogPostPage = (props: BlogPostProps) => {
@@ -36,13 +39,19 @@ const BlogPostPage = (props: BlogPostProps) => {
                     currentUser={props.currentUser}
                     userModal={props.userModal}
                     setUserModal={props.setUserModal}
+                    menuModal={props.menuModal}
+                    setMenuModal={props.setMenuModal}
+
                 />
             </div>
             <div className='relative mt-18'>
-                {props.userModal && (
-                    <div className='sticky'>
-                        <UsersModal />
-                    </div>
+                    {props.userModal && props.currentUser !== null && (
+                        <div className='fixed'>
+                            <UsersModal 
+                            setCurrentUser={props.setCurrentUser}
+                            currentUser={props.currentUser}
+                            />
+                        </div>
                 )}
             </div>
             <div className='p-4 '>

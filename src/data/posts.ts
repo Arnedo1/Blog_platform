@@ -13,12 +13,14 @@ export interface Author {
     date: string;
     avatar: string;
   }
+  
   export interface User {
     name?: string;
     usersName?: string;
     email?: string;
     avatar?: string;
 }
+
 export interface UserArrayData {
     id: number;
     likes?: number;

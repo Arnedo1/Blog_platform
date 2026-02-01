@@ -9,12 +9,12 @@ interface BlogListProps {
     setUserModal: (value: boolean) => void;
 }
 
-const BlogList = (props: BlogListProps) => {
+const BlogList = ({setTopFilter, topFilter}: BlogListProps) => {
     return (
         <div className='bg-gray-100'>
             <TopFilter
-                setTopFilter={props.setTopFilter}
-                topFilter={props.topFilter}
+                setTopFilter={setTopFilter}
+                topFilter={topFilter}
             />
 
             {blogPosts.map((blog) => (

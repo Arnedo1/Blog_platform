@@ -7,6 +7,8 @@ import type { User, UserArrayData} from './data/posts'
 
 const App = () => {
     const [userModal, setUserModal] = useState<boolean>(false);
+    const [menuModal, setMenuModal] = useState<boolean>(false);
+    const [loginModal, setLoginModal] = useState<boolean>(false);
     const [userArray, setUserArray] = useState<UserArrayData[]>([])
     const [currentUser, setCurrentUser] = useState<User | null>(() => {
         const saved = localStorage.getItem('currentUser');
@@ -28,7 +30,10 @@ const App = () => {
                             currentUser={currentUser}
                             userModal={userModal}
                             setUserModal={setUserModal}
-                    
+                            menuModal={menuModal}
+                            setMenuModal={setMenuModal}
+                            loginModal={loginModal}
+                            setLoginModal={setLoginModal}
                         />
                     }
                 />
@@ -40,6 +45,8 @@ const App = () => {
                             currentUser={currentUser}
                             userModal={userModal}
                             setUserModal={setUserModal}
+                            menuModal={menuModal}
+                            setMenuModal={setMenuModal}
                         />
                     }
                 />
@@ -53,6 +60,8 @@ const App = () => {
                             setUserModal={setUserModal}
                             userArray={userArray}
                             setUserArray={setUserArray}
+                            menuModal={menuModal}
+                            setMenuModal={setMenuModal}
                         />
                     }
                 />
