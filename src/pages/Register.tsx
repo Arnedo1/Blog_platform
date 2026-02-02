@@ -43,8 +43,10 @@ const Register = (props: RegisterProps) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState<FormErrors>({});
 
-    const nameExist = props.userArray.find((users)=> users.usersName === usersName)
-    const emailExist = props.userArray.find((users)=> users.email === email)
+    const nameExist = props.userArray.find(
+        (users) => users.usersName === usersName
+    );
+    const emailExist = props.userArray.find((users) => users.email === email);
 
     const validate = () => {
         const newErrors: FormErrors = {};
@@ -69,7 +71,6 @@ const Register = (props: RegisterProps) => {
         if (password !== confirmPassword) {
             newErrors.confirmPassword = 'paswoord komt niet overeen';
         }
-
 
         setError(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -100,9 +101,8 @@ const Register = (props: RegisterProps) => {
         }
     };
     useEffect(() => {
-   console.log(props.userArray)
-    }, [props.userArray])
-    
+        console.log(props.userArray);
+    }, [props.userArray]);
 
     return (
         <div>
