@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { User } from "../data/posts";
 
 interface UserModalData{
@@ -14,7 +15,9 @@ const UsersModal = (props:UserModalData) => {
                 <div className="flex flex-col gap-4">
                     <div>Dashboard</div>
                     <div>Instellingen</div>
+                    <Link to={'/newblog'}>
                     <div>Nieuw Blog</div>
+                    </Link>
                 </div>
                 <div 
                 onClick={()=>props.setCurrentUser(null)}

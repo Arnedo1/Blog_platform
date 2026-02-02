@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import Register from './pages/Register';
 import { useEffect, useState } from 'react';
 import type { User, UserArrayData} from './data/posts'
+import NewBlogForm from './components/NewBlogForm';
 
 const App = () => {
     const [userModal, setUserModal] = useState<boolean>(false);
@@ -72,6 +73,9 @@ const App = () => {
                         />
                     }
                 />
+                <Route path='/newblog' element={
+                  <NewBlogForm/>
+                }/>
             </Routes>
         </BrowserRouter>
     );
