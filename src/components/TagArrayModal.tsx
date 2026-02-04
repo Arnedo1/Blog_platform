@@ -1,12 +1,22 @@
 import { availableTags } from '../data/tags';
-const TagArrayModal = () => {
+
+interface TagArrayModalProps{
+    setBlogTags:(value:string[])=>void
+    blogTags:string[]
+}
+
+const TagArrayModal = ({setBlogTags, blogTags}:TagArrayModalProps) => {
     return (
         <div
             onClick={(e) => e.stopPropagation()}
-            className='border h-35 overflow-scroll rounded-md p-4 pt-1 border-gray-300'>
+            className='border h-35 overflow-scroll fixed bg-white rounded-md p-4 pt-1 border-gray-300'>
             {availableTags.map((tag) => (
-                <div className='py-1'>
-                    <span className='mr-1'>#</span>
+                <div 
+                onClick={()=>{
+                    if (blogTags.length < 3)
+                    {setBlogTags([...blogTags, `# ${tag} `])}}}
+                className='py-1 mr-2'>
+                    <span className='my-1'>#</span>
                     {tag}
                 </div>
             ))}

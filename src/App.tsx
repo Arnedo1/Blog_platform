@@ -3,16 +3,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Register from './pages/Register';
 import { useEffect, useState } from 'react';
-import type { User, UserArrayData} from './data/posts'
+import type { User, UserArrayData } from './data/posts';
 import NewBlogForm from './components/NewBlogForm';
 
 const App = () => {
     const [userModal, setUserModal] = useState<boolean>(false);
     const [menuModal, setMenuModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
-    const [userArray, setUserArray] = useState<UserArrayData[]>(()=> {
-      const saved = localStorage.getItem('userArray')
-      return saved ? JSON.parse(saved) : []})
+    const [userArray, setUserArray] = useState<UserArrayData[]>(() => {
+        const saved = localStorage.getItem('userArray');
+        return saved ? JSON.parse(saved) : [];
+    });
     const [currentUser, setCurrentUser] = useState<User | null>(() => {
         const saved = localStorage.getItem('currentUser');
         return saved ? JSON.parse(saved) : null;
@@ -22,8 +23,8 @@ const App = () => {
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
     }, [currentUser]);
     useEffect(() => {
-      localStorage.setItem('userArray', JSON.stringify(userArray));
-  }, [userArray]);
+        localStorage.setItem('userArray', JSON.stringify(userArray));
+    }, [userArray]);
 
     return (
         <BrowserRouter basename='/Blog_platform'>
@@ -73,9 +74,15 @@ const App = () => {
                         />
                     }
                 />
-                <Route path='/newblog' element={
-                  <NewBlogForm/>
-                }/>
+                <Route
+                    path='/newblog'
+                    element={
+                        <NewBlogForm
+                            setCurrentUser={setCurrentUser}
+                            currentUser={currentUser}
+                        />
+                    }
+                />
             </Routes>
         </BrowserRouter>
     );
