@@ -13,12 +13,13 @@ export interface Author {
     date: string;
     avatar: string;
   }
-  
+
   export interface User {
     name?: string;
     usersName?: string;
     email?: string;
     avatar?: string;
+    posts?:BlogPost[];
 }
 
 export interface UserArrayData {
@@ -34,14 +35,14 @@ export interface UserArrayData {
   export interface BlogPost {
     id: number;
     title: string;
-    slug: string;
-    excerpt: string;
+    slug?: string;
+    excerpt?: string;
     content: string;
-    coverImage: string;
+    coverImage?: string;
     author: Author;
     date: string;
-    readTime: number;
-    categories: string[];
+    readTime?: number;
+    categories?: string[];
     tags: string[];
     comments: Comment[];
     likes: number;

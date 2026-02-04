@@ -35,18 +35,21 @@ const HomePage = (props: HomePageProps) => {
                     userArray={props.userArray}
                 />
                 <div className='relative mt-18'>
-                    {props.userModal &&
-                        props.currentUser !== null &&
-                        props.menuModal === false && (
-                            <div className='fixed'>
-                                <UsersModal
-                                    setCurrentUser={props.setCurrentUser}
-                                    currentUser={props.currentUser}
-                                />
-                            </div>
-                        )}
-                    {props.menuModal === true && props.userModal === false && (
-                        <div className='fixed'>
+ 
+                    {props.userModal && props.currentUser && (
+                        <div className='fixed flex items-center justify-center bg-black/50 z-40'>
+                            <UsersModal
+                                setCurrentUser={props.setCurrentUser}
+                                currentUser={props.currentUser}
+                                userModal={props.userModal}
+                                setUserModal={props.setUserModal}
+                            />
+                        </div>
+                    )}
+
+
+                    {props.menuModal && !props.currentUser && (
+                        <div className='fixed flex items-center justify-center bg-black/50 z-40'>
                             <MenuModal
                                 loginModal={props.loginModal}
                                 setLoginModal={props.setLoginModal}
@@ -57,8 +60,10 @@ const HomePage = (props: HomePageProps) => {
                             />
                         </div>
                     )}
+
+  
                     {props.loginModal && (
-                        <div className=''>
+                        <div className='fixed inset-0 flex items-center justify-center bg-black/50 z-40'>
                             <LoginModal
                                 loginModal={props.loginModal}
                                 setLoginModal={props.setLoginModal}
@@ -68,6 +73,7 @@ const HomePage = (props: HomePageProps) => {
                             />
                         </div>
                     )}
+
                     <BlogList
                         topFilter={topFilter}
                         setTopFilter={setTopFilter}

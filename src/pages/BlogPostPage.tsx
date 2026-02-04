@@ -51,6 +51,8 @@ const BlogPostPage = (props: BlogPostProps) => {
                             <UsersModal 
                             setCurrentUser={props.setCurrentUser}
                             currentUser={props.currentUser}
+                            userModal={props.userModal}
+                            setUserModal={props.setUserModal}
                             />
                         </div>
                 )}
