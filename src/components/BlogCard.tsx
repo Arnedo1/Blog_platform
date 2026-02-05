@@ -1,8 +1,9 @@
 import type { BlogPost } from '../data/posts';
-import { FcLike } from 'react-icons/fc';
+import { CiHeart } from "react-icons/ci";
 import { LuMessageCircle } from 'react-icons/lu';
 import { FaRegBookmark } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+
 
 
 const BlogCard = ({ blog }: { blog: BlogPost }) => {
@@ -34,7 +35,10 @@ const BlogCard = ({ blog }: { blog: BlogPost }) => {
                 <div className='flex gap-4'>
                 <div className='flex gap-1 cursor-pointer'>
                     <div>
-                        <FcLike className='size-5' />
+                    <CiHeart 
+                    
+                    className='size-5 cursor-pointer'/>
+
                     </div>
                     <div className='text-[14px]'>{blog.likes}</div>
                 </div>

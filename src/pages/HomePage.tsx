@@ -2,7 +2,7 @@ import { useState } from 'react';
 import BlogList from '../components/BlogList';
 import Header from '../components/Header';
 import UsersModal from '../components/UsersModal';
-import type { User } from '../data/posts';
+import type { BlogPost, User } from '../data/posts';
 import MenuModal from '../components/MenuModal';
 import LoginModal from '../components/LoginModal';
 import type { UserArrayData } from '../data/posts';
@@ -17,6 +17,8 @@ interface HomePageProps {
     loginModal: boolean;
     setLoginModal: (value: boolean) => void;
     userArray: UserArrayData[];
+    blogPostList:BlogPost[]
+    setBlogPostList:(value:BlogPost[])=>void
 }
 
 const HomePage = (props: HomePageProps) => {
@@ -79,6 +81,8 @@ const HomePage = (props: HomePageProps) => {
                         setTopFilter={setTopFilter}
                         userModal={props.userModal}
                         setUserModal={props.setUserModal}
+                        blogPostList={props.blogPostList}
+                        setBlogPostList={props.setBlogPostList}
                     />
                 </div>
             </div>

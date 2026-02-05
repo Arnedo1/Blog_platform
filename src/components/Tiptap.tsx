@@ -6,11 +6,14 @@ import { MdFormatListBulleted } from 'react-icons/md';
 interface TiptapProps {
     value: string;
     onChange: (content: string) => void;
+    placeholder?: string;
 }
 
-const Tiptap = ({ value, onChange }: TiptapProps) => {
+const Tiptap = ({ value, onChange}: TiptapProps) => {
     const editor = useEditor({
-        extensions: [StarterKit.configure({ heading: { levels: [1, 2, 3] } })],
+        extensions: [
+            StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
+        ],
         content: value,
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
@@ -25,7 +28,7 @@ const Tiptap = ({ value, onChange }: TiptapProps) => {
         <div className='rounded'>
             <div className='flex gap-2 h-14 bg-gray-100 p-2'>
                 <button
-                    type="button"
+                    type='button'
                     onMouseDown={(e) => e.preventDefault()}
                     onClick={() => editor.chain().focus().toggleBold().run()}
                     className={
@@ -37,7 +40,7 @@ const Tiptap = ({ value, onChange }: TiptapProps) => {
                 </button>
 
                 <button
-                    type="button"
+                    type='button'
                     onMouseDown={(e) => e.preventDefault()}
                     onClick={() => editor.chain().focus().toggleItalic().run()}
                     className={
@@ -54,7 +57,11 @@ const Tiptap = ({ value, onChange }: TiptapProps) => {
                         if (val === 0) {
                             editor.chain().focus().setParagraph().run();
                         } else {
-                            editor.chain().focus().setHeading({ level: val as 1 | 2 | 3 }).run();
+                            editor
+                                .chain()
+                                .focus()
+                                .setHeading({ level: val as 1 | 2 | 3 })
+                                .run();
                         }
                     }}
                     className='px-3 py-1 rounded border border-gray-300 focus:outline-none bg-white'>
@@ -65,9 +72,11 @@ const Tiptap = ({ value, onChange }: TiptapProps) => {
                 </select>
 
                 <button
-                    type="button"
+                    type='button'
                     onMouseDown={(e) => e.preventDefault()}
-                    onClick={() => editor.chain().focus().toggleBulletList().run()}
+                    onClick={() =>
+                        editor.chain().focus().toggleBulletList().run()
+                    }
                     className={
                         editor.isActive('bulletList')
                             ? 'bg-blue-500 text-white px-3 py-1 rounded'

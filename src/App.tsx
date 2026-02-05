@@ -3,13 +3,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Register from './pages/Register';
 import { useEffect, useState } from 'react';
-import type { User, UserArrayData } from './data/posts';
+import { blogPosts, type BlogPost, type User, type UserArrayData } from './data/posts';
 import NewBlogForm from './components/NewBlogForm';
 
 const App = () => {
     const [userModal, setUserModal] = useState<boolean>(false);
     const [menuModal, setMenuModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
+    const [blogPostList, setBlogPostList] = useState<BlogPost[]>(()=> {
+      const saved = localStorage.getItem('blogpostlist')
+      return saved ? JSON.parse(saved) : blogPosts
+    })
     const [userArray, setUserArray] = useState<UserArrayData[]>(() => {
         const saved = localStorage.getItem('userArray');
         return saved ? JSON.parse(saved) : [];
@@ -18,6 +22,10 @@ const App = () => {
         const saved = localStorage.getItem('currentUser');
         return saved ? JSON.parse(saved) : null;
     });
+    useEffect(() => {
+  localStorage.setItem('blogpostlist', JSON.stringify(blogPostList))
+    }, [blogPostList])
+    
 
     useEffect(() => {
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -27,7 +35,7 @@ const App = () => {
     }, [userArray]);
 
     return (
-        <BrowserRouter basename='/Blog_platform'>
+        <BrowserRouter basename='/blog_platform'>
             <Routes>
                 <Route
                     path='/'
@@ -42,6 +50,8 @@ const App = () => {
                             loginModal={loginModal}
                             setLoginModal={setLoginModal}
                             userArray={userArray}
+                            blogPostList={blogPostList}
+                            setBlogPostList={setBlogPostList}
                         />
                     }
                 />
@@ -56,6 +66,8 @@ const App = () => {
                             menuModal={menuModal}
                             setMenuModal={setMenuModal}
                             userArray={userArray}
+                            blogPostList={blogPostList}
+                            setBlogPostList={setBlogPostList}
                         />
                     }
                 />
@@ -80,6 +92,9 @@ const App = () => {
                         <NewBlogForm
                             setCurrentUser={setCurrentUser}
                             currentUser={currentUser}
+                            blogPostList={blogPostList}
+                            setBlogPostList={setBlogPostList}
+                            setUserModal={setUserModal}
                         />
                     }
                 />

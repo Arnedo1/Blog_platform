@@ -22,7 +22,9 @@ const UsersModal = (props:UserModalData) => {
                     <div>Dashboard</div>
                     <div>Instellingen</div>
                     <Link to={'/newblog'}>
-                    <div>Nieuw Blog</div>
+                    <div
+                    onClick={()=>props.setUserModal(false)}
+                    >Nieuw Blog</div>
                     </Link>
                 </div>
                 <div 

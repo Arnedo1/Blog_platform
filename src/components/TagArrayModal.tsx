@@ -12,6 +12,7 @@ const TagArrayModal = ({setBlogTags, blogTags}:TagArrayModalProps) => {
             className='border h-35 overflow-scroll fixed bg-white rounded-md p-4 pt-1 border-gray-300'>
             {availableTags.map((tag) => (
                 <div 
+                key={tag}
                 onClick={()=>{
                     if (blogTags.length < 3)
                     {setBlogTags([...blogTags, `# ${tag} `])}}}
