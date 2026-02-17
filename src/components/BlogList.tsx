@@ -5,8 +5,6 @@ import type { BlogPost } from '../data/posts';
 interface BlogListProps {
     setTopFilter: (value: string) => void;
     topFilter: string;
-    userModal: boolean;
-    setUserModal: (value: boolean) => void;
     blogPostList:BlogPost[]
     setBlogPostList:(value:BlogPost[])=>void
 }

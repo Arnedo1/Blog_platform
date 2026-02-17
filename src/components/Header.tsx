@@ -1,34 +1,20 @@
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
-import type { UserArrayData } from '../data/posts';
 import logo from '../assets/logo.svg'
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
-interface User {
-    name?: string;
-    usersName?: string;
-    email?: string;
-    avatar?: string;
-}
 
-interface HeaderProps {
-    setCurrentUser: (value: User | null) => void;
-    currentUser: User | null;
-    userModal: boolean;
-    setUserModal: (value: boolean) => void;
-    menuModal: boolean;
-    setMenuModal: (value: boolean) => void;
-    userArray: UserArrayData[];
-}
-
-const Header = (props: HeaderProps) => {
+const Header = () => {
+    const auth = useContext(AuthContext)
     return (
         <div className='flex p-4 fixed w-full top-0 z-20 bg-white justify-between px-4 shadow shadow-black/20'>
             <div className='flex gap-4'>
                 <div>
                     <RxHamburgerMenu
                         onClick={() => {
-                            if (!props.currentUser) {
-                                props.setMenuModal(true);
+                            if (!auth?.currentUser) {
+                                auth?.setMenuModal(true);
                             }
                         }}
                         className='mt-1 h-8 w-6 cursor-pointer'
@@ -46,17 +32,17 @@ const Header = (props: HeaderProps) => {
             </div>
 
             <div>
-                {props.currentUser && props.currentUser.avatar ? (
+                {auth?.currentUser && auth?.currentUser.avatar ? (
                     <div
                         onClick={() => {
-                            if (!props.menuModal) {
-                                props.setUserModal(true);
+                            if (!auth?.menuModal) {
+                                auth?.setUserModal(true);
                             }
                         }}
                         className='size-10 flex justify-center items-center bg-gray-200 rounded-full cursor-pointer'>
                         <img
                             className='size-8'
-                            src={props.currentUser.avatar}
+                            src={auth?.currentUser.avatar}
                             alt='User avatar'
                         />
                     </div>

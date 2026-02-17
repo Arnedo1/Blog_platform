@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router';
 import { IoMdClose } from 'react-icons/io';
-import type { UserArrayData } from '../data/posts';
+import { AuthContext } from '../context/AuthContext';
 
 interface FormErrors {
     avatar?: string;
@@ -12,25 +12,9 @@ interface FormErrors {
     confirmPassword?: string;
     usersName?: string;
 }
-interface User {
-    name?: string;
-    usersName?: string;
-    email?: string;
-    avatar?: string;
-}
 
-interface RegisterProps {
-    setCurrentUser: (value: User | null) => void;
-    currentUser: User | null;
-    userModal: boolean;
-    setUserModal: (value: boolean) => void;
-    userArray: UserArrayData[];
-    setUserArray: (value: UserArrayData[]) => void;
-    menuModal: boolean;
-    setMenuModal: (value: boolean) => void;
-}
-
-const Register = (props: RegisterProps) => {
+const Register = () => {
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
     const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,10 +27,10 @@ const Register = (props: RegisterProps) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState<FormErrors>({});
 
-    const nameExist = props.userArray.find(
+    const nameExist = auth?.userArray.find(
         (users) => users.usersName === usersName
     );
-    const emailExist = props.userArray.find((users) => users.email === email);
+    const emailExist = auth?.userArray.find((users) => users.email === email);
 
     const validate = () => {
         const newErrors: FormErrors = {};
@@ -78,8 +62,8 @@ const Register = (props: RegisterProps) => {
 
     const submitForm = () => {
         if (validate()) {
-            props.setUserArray([
-                ...props.userArray,
+            auth?.setUserArray([
+                ...auth.userArray,
                 {
                     id: Date.now(),
                     avatar,
@@ -90,7 +74,7 @@ const Register = (props: RegisterProps) => {
                     posts: [],
                 },
             ]);
-            props.setCurrentUser({ avatar, name, usersName, email });
+            auth?.setCurrentUser({ avatar, name, usersName, email });
             setName('');
             setUsersName('');
             setEmail('');
@@ -101,20 +85,12 @@ const Register = (props: RegisterProps) => {
         }
     };
     useEffect(() => {
-        console.log(props.userArray);
-    }, [props.userArray]);
+        console.log(auth?.userArray);
+    }, [auth?.userArray]);
 
     return (
         <div>
-            <Header
-                setCurrentUser={props.setCurrentUser}
-                currentUser={props.currentUser}
-                userModal={props.userModal}
-                setUserModal={props.setUserModal}
-                menuModal={props.menuModal}
-                setMenuModal={props.setMenuModal}
-                userArray={props.userArray}
-            />
+            <Header />
             <div className='p-4 mt-18'>
                 <div className='flex justify-between items-center'>
                     <div className='text-xl font-bold mb-7'>

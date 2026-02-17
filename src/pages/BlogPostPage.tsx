@@ -4,28 +4,17 @@ import { LuMessageCircle } from 'react-icons/lu';
 import Header from '../components/Header';
 import Comments from '../components/CommentList';
 import UsersModal from '../components/UsersModal';
-import type { BlogPost, UserArrayData } from '../data/posts';
-
-interface User {
-    name?: string;
-    usersName?: string;
-    email?: string;
-    avatar?: string;
-}
+import type { BlogPost} from '../data/posts';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 interface BlogPostProps {
-    setCurrentUser: (value: User | null) => void;
-    currentUser: User | null;
-    userModal: boolean;
-    setUserModal: (value: boolean) => void;
-    menuModal: boolean;
-    setMenuModal: (value: boolean) => void;
-    userArray: UserArrayData[];
     blogPostList: BlogPost[];
     setBlogPostList:(value:BlogPost[])=>void
 }
 
 const BlogPostPage = (props: BlogPostProps) => {
+    const auth = useContext(AuthContext)
     const navigate = useNavigate()
     const { id } = useParams();
     const blog = props.blogPostList.find((post) => post.id === Number(id));
@@ -45,23 +34,12 @@ const BlogPostPage = (props: BlogPostProps) => {
         <div>
             <div className='fixed top-0'>
                 <Header
-                    setCurrentUser={props.setCurrentUser}
-                    currentUser={props.currentUser}
-                    userModal={props.userModal}
-                    setUserModal={props.setUserModal}
-                    menuModal={props.menuModal}
-                    setMenuModal={props.setMenuModal}
-                    userArray={props.userArray}
                 />
             </div>
             <div className='relative mt-18'>
-                {props.userModal && props.currentUser !== null && (
+                {auth?.userModal && auth?.currentUser !== null && (
                     <div className='fixed'>
                         <UsersModal
-                            setCurrentUser={props.setCurrentUser}
-                            currentUser={props.currentUser}
-                            userModal={props.userModal}
-                            setUserModal={props.setUserModal}
                         />
                     </div>
                 )}
