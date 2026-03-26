@@ -1,4 +1,4 @@
-import type { User, UserArrayData } from "../data/posts";
+import type { User, UserArrayData } from "../data/types";
 import { createContext } from "react";
 
 export interface AuthContextType {
@@ -10,8 +10,12 @@ export interface AuthContextType {
     setCurrentUser: (value: User | null) => void;
     userModal: boolean;
     setUserModal: (value: boolean) => void;
-    userArray: UserArrayData[];
-    setUserArray:(value:UserArrayData[])=>void
+    register: (userData: UserArrayData) => Promise<void>
+    login:(email:string, password:string)=>void
+    logout:()=>void
+    error:string | null
+    setError:(value:string | null)=>void
+
 }
 export const AuthContext = createContext<AuthContextType|undefined>(undefined)
 

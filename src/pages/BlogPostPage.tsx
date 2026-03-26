@@ -1,105 +1,124 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { CiHeart } from 'react-icons/ci';
-import { LuMessageCircle } from 'react-icons/lu';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { BlogContext } from '../context/BlogContext';
 import Header from '../components/Header';
-import Comments from '../components/CommentList';
-import UsersModal from '../components/UsersModal';
-import type { BlogPost} from '../data/posts';
-import { useContext } from 'react';
+import CommentList from '../components/CommentList';
+import FooterMobile from '../components/FooterMobile';
+import LikeBox from '../components/LikeBox';
 import { AuthContext } from '../context/AuthContext';
+import CommentCard from '../components/CommentCard';
 
-interface BlogPostProps {
-    blogPostList: BlogPost[];
-    setBlogPostList:(value:BlogPost[])=>void
-}
-
-const BlogPostPage = (props: BlogPostProps) => {
-    const auth = useContext(AuthContext)
-    const navigate = useNavigate()
+const BlogPostPage = () => {
     const { id } = useParams();
-    const blog = props.blogPostList.find((post) => post.id === Number(id));
+    const nav = useNavigate();
+    const blog = useContext(BlogContext);
+    const auth = useContext(AuthContext);
 
-    if (!blog) {
-        return <div>Blog niet gevonden!</div>;
-    }
+    useEffect(() => {
+        const fetchComments = async () => {
+            const res = await fetch(`http://localhost:3001/comments/${id}`);
+            const data = await res.json();
+            blog?.setComments(data);
+        };
+        fetchComments();
+    }, [id]);
 
-    const handleDelete = () => {
-        const updatedlist = props.blogPostList.filter((post)=>post.id !== Number(id))
-        props.setBlogPostList(updatedlist)
-        navigate('/')
-
-    }
+    if (!auth || !blog) return null;
+    const post = blog.blogPostList.find((post) => post.id === Number(id));
+    if (!post) return <div>Blog niet gevonden!</div>;
 
     return (
         <div>
-            <div className='fixed top-0'>
-                <Header
-                />
-            </div>
-            <div className='relative mt-18'>
-                {auth?.userModal && auth?.currentUser !== null && (
-                    <div className='fixed'>
-                        <UsersModal
-                        />
-                    </div>
-                )}
-            </div>
-            <div className='p-4 '>
-                <div className='flex justify-around py-1 text-gray-500 bg-blue-50 rounded border border-blue-200 mb-4'>
-                    <div 
-                    onClick={()=>handleDelete()}
-                    className='cursor-pointer'>Delete</div>
-                    <div className='cursor-pointer'>Edit</div>
+            <Header />
+            <div className='flex'>
+                <div className='md:block hidden'>
+                    <LikeBox post={post} />
                 </div>
-                <div className='flex gap-4'>
-                    <div>
-                        <img
-                            className='size-10 rounded-full'
-                            src={blog.author.avatar}
-                            alt='avatar'
-                        />
-                    </div>
-                    <div>
-                        <div>{blog.author.name}</div>
-                        <div className='text-[12px] flex gap-1'>
-                            <p>Posted</p>
-                            {blog.date}
+                <div className='w-full'>
+                    <div className='p-4 pb-20 mt-15'>
+                        {post.user_id === auth?.currentUser?.id && (
+                            <div className='flex justify-around py-1 text-gray-500 bg-blue-50 rounded border border-blue-200 mb-4'>
+                                <div
+                                    onClick={() => {
+                                        blog.deleteBlog(post.id);
+                                        nav(-1);
+                                    }}
+                                    className='cursor-pointer'>
+                                    Delete
+                                </div>
+                                <div
+                                    onClick={() => {
+                                        blog.handleEdit(
+                                            post.title,
+                                            post.content,
+                                            post.tags,
+                                            post.id
+                                        );
+                                        nav('/edit_blog');
+                                    }}
+                                    className='cursor-pointer'>
+                                    Edit
+                                </div>
+                            </div>
+                        )}
+                        <div className='flex gap-4'>
+                            <div>
+                                <img
+                                    className='size-10 rounded-full'
+                                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${post.avatar}`}
+                                    alt='avatar'
+                                />
+                            </div>
+                            <div>
+                                <div>{post.name}</div>
+                                <div className='text-[12px] flex gap-1'>
+                                    <p>
+                                        Posted
+                                        <span className='ml-1'>
+                                            {new Date(
+                                                post.created
+                                            ).toLocaleDateString()}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div className='font-bold text-2xl my-4'>{blog.title}</div>
-                <div className='flex gap-4 mb-4 text-[14px] text-gray-500'>
-                    {blog.tags.map((tag) => (
-                        <p key={tag}>#{tag}</p>
-                    ))}
-                </div>
-                <div className='flex gap-4 mb-4 h-10 border-b border-gray-200'>
-                    <div className='flex gap-1 cursor-pointer'>
-                        <CiHeart className='size-5 cursor-pointer' />
-                        <div className='text-[14px]'>{blog.likes}</div>
-                    </div>
-                    <div className='flex gap-1'>
-                        <LuMessageCircle className='mt-0.5' />
-                        <div className='text-[14px]'>
-                            {blog.comments.length}
+                        <div className='font-bold text-2xl my-4'>
+                            {post.title}
                         </div>
+
+                        <div
+                            dangerouslySetInnerHTML={{ __html: post.content }}
+                            className='
+                    [&_p]:mt-1
+                    [&_p]:mb-4
+                    [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-4
+                    [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-3
+                    [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mb-2
+                    [&_ul]:list-disc [&_ul]:pl-5
+                    [&_strong]:font-bold
+                    [&_em]:italic
+                '
+                        />
+                        <div className='flex gap-4 mb-4 h-10 text-[14px] text-gray-500 border-b border-gray-200'>
+                            {post.tags.map((tag) => (
+                                <p key={tag}>#{tag}</p>
+                            ))}
+                        </div>
+                        <CommentList post={post} />
+                        {blog.comments.map((comment) => (
+                    <CommentCard
+                        key={comment.id}
+                        comment={comment}
+                    />
+                ))}
+                    </div>
+                    <div className='md:hidden'>
+                        <FooterMobile post={post} />
                     </div>
                 </div>
-                <div
-                    dangerouslySetInnerHTML={{ __html: blog.content }}
-                    className='
-        [&_p]:mt-1
-        [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-4
-        [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-3
-        [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mb-2
-        [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-
-        [&_li]:
-        [&_strong]:font-bold
-        [&_em]:italic
-    '
-                />
             </div>
-            <Comments blog={blog} />
         </div>
     );
 };

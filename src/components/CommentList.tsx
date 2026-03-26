@@ -1,27 +1,37 @@
-import { useState } from "react";
-import type { BlogPost } from "../data/posts";
-import CommentCard from "./CommentCard";
+import { useContext } from 'react';
+import { BlogContext } from '../context/BlogContext';
+import { AuthContext } from '../context/AuthContext';
+import type { BlogPost } from '../data/types';
 
-const CommentList = ({blog} : {blog : BlogPost}) => {
-    const [newComment, setNewComment] = useState('')
+
+const CommentList = ({post}:{post:BlogPost}) => {
+    const blog = useContext(BlogContext);
+    const auth = useContext(AuthContext);
+    if (!blog || !auth) return null;
+    if (!auth.currentUser) return null
     return (
-        <div>
-            <div className="flex justify-between border-t border-gray-100 pt-4 items-center px-4">
-                <div className="text-xl font-semibold">Reacties<span className="ml-1">({blog.comments.length})</span></div>
-                <button className="px-6 py-2 rounded font-light shadow shadow-black/20 ">Wordt lid</button>
+        <div className='pb-5 border-b border-gray-200'>
+            <div className='flex justify-between  pt-4 items-center px-4'>
+                <div className='text-xl font-semibold'>Reacties</div>
+
             </div>
-            <div className="flex px-4 my-4 gap-2 items-start">
-            <img
-                            src={blog.author.avatar}
-                            alt='Logo'
-                            className='w-10 rounded-full'
-                        />
-                <textarea 
-            onChange={(e)=> setNewComment(e.target.value)}
-            value={newComment}
-            placeholder="Schijf hier je reactie"
-            className="border p-2 outline-none h-20 w-full border-gray-300 resize-y rounded"></textarea></div>
-            <div>{blog.comments.map((comment)=> <CommentCard key={comment.id} comment={comment}/>)}</div>
+            <div className='flex px-4 my-4 gap-2 items-start'>
+                <img
+                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${auth.currentUser.avatar}`}
+                    alt='Logo'
+                    className='w-10 rounded-full'
+                />
+                <textarea
+                    onChange={(e) => blog.setCommentContent(e.target.value)}
+                    placeholder='Schijf hier je reactie'
+                    className='border p-2 outline-none h-20 w-full border-gray-300 resize-y rounded'
+                    value={blog.commentContent}
+                    onKeyDown={(e)=> e.key === 'Enter' && blog.addComments(auth.currentUser!.id, post.id, blog.commentContent)}
+                />
+            </div>
+            <button 
+            onClick={()=>blog.addComments(auth.currentUser!.id, post.id, blog.commentContent)}
+            className="bg-gray-800 ml-17 hover:bg-gray-700 text-white rounded-lg py-2 px-10 text-sm transition-colors">Verstuur</button>
         </div>
     );
 };

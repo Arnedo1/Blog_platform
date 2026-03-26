@@ -1,26 +1,64 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect, type ReactNode } from 'react';
 import { AuthContext } from './AuthContext';
-import type {UserArrayData, User}from '../data/posts';
+import type { UserArrayData, User } from '../data/types';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [userModal, setUserModal] = useState<boolean>(false);
     const [menuModal, setMenuModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
-    const [userArray, setUserArray] = useState<UserArrayData[]>(() => {
-        const saved = localStorage.getItem('userArray');
-        return saved ? JSON.parse(saved) : [];
-    });
+    const [error, setError] = useState<string | null>(null);
     const [currentUser, setCurrentUser] = useState<User | null>(() => {
         const saved = localStorage.getItem('currentUser');
         return saved ? JSON.parse(saved) : null;
     });
 
+    const register = async (userData: UserArrayData) => {
+        try {
+            const res = await fetch('http://localhost:3001/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData),
+            });
+            const newUser = await res.json();
+            setCurrentUser(newUser);
+        } catch (error) {
+            setError('Er is iets misgegaan, probeer opnieuw.');
+        }
+    };
+
+    const login = async (password: string, email: string) => {
+        try {
+            const res = await fetch('http://localhost:3001/users/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password, email }),
+            });
+            const user = await res.json();
+            setCurrentUser(user);
+            setLoginModal(false);
+        } catch (error) {
+            setError('Er is iets misgegaan, probeer opnieuw.');
+        }
+    };
+
+    const logout = async () => {
+        try {
+            setCurrentUser(null);
+            localStorage.removeItem('currentUser');
+            setUserModal(false);
+        } catch (error) {
+            setError('Er is iets misgegaan, probeer opnieuw.');
+        }
+    };
+
     useEffect(() => {
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        if (currentUser) {
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        } else {
+            localStorage.removeItem('currentUser');
+        }
     }, [currentUser]);
-    useEffect(() => {
-        localStorage.setItem('userArray', JSON.stringify(userArray));
-    }, [userArray]);
 
     return (
         <AuthContext.Provider
@@ -33,8 +71,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setUserModal,
                 currentUser,
                 setCurrentUser,
-                userArray,
-                setUserArray,
+                register,
+                login,
+                logout,
+                error,
+                setError,
             }}>
             {children}
         </AuthContext.Provider>

@@ -1,37 +1,14 @@
-import TopFilter from './TopFilter';
-import BlogCard from './BlogCard';
-import type { BlogPost } from '../data/posts';
+import BlogCard from "./BlogCard";
+import TopFilter from "./TopFilter";
+import { useContext } from "react";
+import { BlogContext } from "../context/BlogContext";
 
-interface BlogListProps {
-    setTopFilter: (value: string) => void;
-    topFilter: string;
-    blogPostList:BlogPost[]
-    setBlogPostList:(value:BlogPost[])=>void
-}
-
-const BlogList = ({setTopFilter, topFilter, blogPostList}: BlogListProps) => {
-    const sortedPosts = [...blogPostList].sort((a, b) => {
-        const dateA = new Date(a.date).getTime();
-        const dateB = new Date(b.date).getTime();
-        console.log('dateA:', a.date, dateA);
-        console.log('dateB:', b.date, dateB);
-        return dateB - dateA;  
-    });
-
-
+const BlogList = () => {
+    const blog = useContext(BlogContext)
     return (
         <div className='bg-gray-100'>
-            <TopFilter
-                setTopFilter={setTopFilter}
-                topFilter={topFilter}
-            />
-
-            {sortedPosts.map((blog) => (
-                <BlogCard
-                    key={blog.id}
-                    blog={blog}
-                />
-            ))}
+            <TopFilter/>
+            {blog?.blogPostList.map((post)=><BlogCard key={post.id} post={post}/>)}
         </div>
     );
 };

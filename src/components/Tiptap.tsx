@@ -7,9 +7,15 @@ interface TiptapProps {
     value: string;
     onChange: (content: string) => void;
     placeholder?: string;
+    error:ErrorData
+}
+interface ErrorData{
+    title?:string
+    content?:string
+    tags?:string
 }
 
-const Tiptap = ({ value, onChange}: TiptapProps) => {
+const Tiptap = ({ value, onChange, error}: TiptapProps) => {
     const editor = useEditor({
         extensions: [
             StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
@@ -85,10 +91,11 @@ const Tiptap = ({ value, onChange}: TiptapProps) => {
                     <MdFormatListBulleted className='size-6' />
                 </button>
             </div>
+            <div>{error.content && <p className='text-red-500 ml-4 text-sm mt-1'>{error.content}</p>}</div>
 
             <EditorContent
                 editor={editor}
-                className='p-4 min-h-37.5 
+                 className='p-4 h-134 overflow-y-auto 
                 [&_.ProseMirror]:focus:outline-none
                 [&_.ProseMirror_h1]:text-3xl 
                 [&_.ProseMirror_h1]:font-bold

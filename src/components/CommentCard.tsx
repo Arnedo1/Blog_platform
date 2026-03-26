@@ -1,36 +1,49 @@
-import type { Comment } from '../data/posts';
-import { RxAvatar } from 'react-icons/rx';
-import { CiHeart } from 'react-icons/ci';
-import { LuMessageCircle } from 'react-icons/lu';
+import { useContext } from 'react';
+import type { BlogComment } from '../data/types';
+import { MdOutlineDelete } from "react-icons/md";
+import { BlogContext } from '../context/BlogContext';
+import { AuthContext } from '../context/AuthContext';
+import DeleteModal from './DeleteModal';
 
-const CommentCard = ({ comment }: { comment: Comment }) => {
+const CommentCard = ({ comment }: { comment: BlogComment }) => {
+    const blog = useContext(BlogContext);
+    const auth = useContext(AuthContext);
+    if (!blog || !auth) return null;
     return (
-        <div className='p-4 flex gap-2 '>
+        <div className='p-4 mt-3 flex gap-2'>
             <div>
-                {comment.avatar ? (
-                    <img
-                        src={comment.avatar}
-                        alt='avatar'
-                        className='size-8 rounded-full'
-                    />
-                ) : (
-                    <RxAvatar className='size-8'/>
-                )}
+                <img
+                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${comment.avatar}`}
+                    alt='Logo'
+                    className='w-10 rounded-full'
+                />
             </div>
             <div className='p-3 border w-full border-gray-100'>
                 <div className='flex text-sm text-gray-600 justify-between items-center'>
-                    <div className=''>{comment.author}</div>
-                    <div className='mr-5'>{comment.date}</div>
-                </div>
-                <div className='mt-3 mb-7'>{comment.content}</div>
-                <div className='flex items-center gap-5'>
-                    <div>
-                        <CiHeart className='size-6' />
+                    <div>{comment.name}</div>
+                    <div className='flex'>
+                        <div className='mr-5'>
+                            {new Date(comment.created).toLocaleDateString()}
+                        </div>
+                        {comment.users_id === auth.currentUser?.id && (
+                            <MdOutlineDelete
+                                className='size-5 cursor-pointer'
+                                onClick={() => blog.setDeleteModal(comment.id)}
+                            />
+                        )}
+                        {blog.deleteModal === comment.id && (
+                            <div
+                                onClick={() => blog.setDeleteModal(null)}
+                                className='fixed inset-0 bg-black/20 z-900'>
+                                <div className='fixed top-15 z-200'>
+                                    <DeleteModal id={comment.id} blog_id={comment.blog_id} />
+                                </div>
+                            </div>
+                        )}
                     </div>
-                    <div>
-                        <LuMessageCircle className='mt-0.5 size-4.5' />
-                    </div>
                 </div>
+                <div className='mt-3 mb-2'>{comment.content}</div>
+                <div className='flex items-center gap-5'></div>
             </div>
         </div>
     );

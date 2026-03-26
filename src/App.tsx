@@ -1,54 +1,78 @@
-import BlogPostPage from './pages/BlogPostPage';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router';
 import HomePage from './pages/HomePage';
+import EditForm from './pages/EditForm';
+import BlogPostPage from './pages/BlogPostPage';
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
+import MenuModal from './components/MenuModal';
+import LoginModal from './components/LoginModal';
 import Register from './pages/Register';
-import { useEffect, useState } from 'react';
-import { blogPosts, type BlogPost } from './data/posts';
-import NewBlogForm from './components/NewBlogForm';
+import UsersModal from './components/UsersModal';
+import NewBlogForm from './pages/NewBlogForm';
+import { BlogContext } from './context/BlogContext';
+import PreviewModal from './components/PreviewModal';
+import ErrorModal from './components/ErrorModal';
 
 const App = () => {
-    const [blogPostList, setBlogPostList] = useState<BlogPost[]>(() => {
-        const saved = localStorage.getItem('blogpostlist');
-        return saved ? JSON.parse(saved) : blogPosts;
-    });
-
-    useEffect(() => {
-        localStorage.setItem('blogpostlist', JSON.stringify(blogPostList));
-    }, [blogPostList]);
-
+    const auth = useContext(AuthContext);
+    const blog = useContext(BlogContext);
+    if (!auth || !blog) return null;
     return (
-        <BrowserRouter basename='/blog_platform'>
+        <BrowserRouter basename='/Blog_platform'>
+            {auth.menuModal && (
+                <div
+                    onClick={() => auth.setMenuModal(false)}
+                    className='fixed inset-0 bg-black/20 z-900'>
+                    <div className='fixed top-15 z-200'>
+                        <MenuModal />
+                    </div>
+                </div>
+            )}
+            {auth.loginModal && (
+                <div
+                    onClick={() => auth.setLoginModal(false)}
+                    className='fixed inset-0 bg-black/20 z-900'>
+                    <div className='fixed top-15 z-200'>
+                        <LoginModal />
+                    </div>
+                </div>
+            )}
+            {auth.userModal && (
+                <div
+                    onClick={() => auth.setUserModal(false)}
+                    className='fixed inset-0 bg-black/20 z-900'>
+                    <div className='fixed top-15 z-200'>
+                        <UsersModal />
+                    </div>
+                </div>
+            )}
+
+            {blog.preview && (
+                <div className='h-screen w-full z-200'>
+                    <PreviewModal />
+                </div>
+            )}
+            {auth.error && <ErrorModal />}
             <Routes>
                 <Route
                     path='/'
-                    element={
-                        <HomePage
-                            blogPostList={blogPostList}
-                            setBlogPostList={setBlogPostList}
-                        />
-                    }
+                    element={<HomePage />}
                 />
                 <Route
                     path='/blogpost/:id'
-                    element={
-                        <BlogPostPage
-                            blogPostList={blogPostList}
-                            setBlogPostList={setBlogPostList}
-                        />
-                    }
+                    element={<BlogPostPage />}
                 />
                 <Route
-                    path='/registreren'
+                    path='/register'
                     element={<Register />}
                 />
                 <Route
                     path='/newblog'
-                    element={
-                        <NewBlogForm
-                            blogPostList={blogPostList}
-                            setBlogPostList={setBlogPostList}
-                        />
-                    }
+                    element={<NewBlogForm />}
+                />
+                <Route
+                    path='/edit_blog'
+                    element={<EditForm />}
                 />
             </Routes>
         </BrowserRouter>
