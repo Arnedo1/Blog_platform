@@ -18,6 +18,7 @@
     "@tiptap/react": "^3.19.0",
     "@tiptap/starter-kit": "^3.19.0",
     "bcrypt": "^6.0.0",
+    "dotenv": "^17.3.1",
     "jsonwebtoken": "^9.0.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
