@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
     cors({
-        origin: '*',
+        origin: 'https://blog-platform-1-94qc.onrender.com',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type'],
     })
