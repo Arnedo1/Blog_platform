@@ -19,7 +19,7 @@ const App = () => {
     const blog = useContext(BlogContext);
     if (!auth || !blog) return null;
     return (
-        <BrowserRouter basename='/Blog_platform'>
+        <BrowserRouter basename='/'>
             {auth.menuModal && (
                 <div
                     onClick={() => auth.setMenuModal(false)}
