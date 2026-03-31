@@ -15,7 +15,7 @@ export interface BlogContextType {
     setContentNewBlog:(value:string)=>void
     preview:boolean
     setPreview:(value:boolean)=>void
-    postBlog:(title:string, content:string, tags:string[], user_id:number)=> void
+    postBlog:()=> void
     deleteBlog:(id:number)=>void
     handleEdit:(title:string, content:string, tags:string[], id:number)=>void
     postEdit:(title:string, content:string, tags:string[], id:number)=>void
@@ -31,6 +31,9 @@ export interface BlogContextType {
     setComments:(value:BlogComment[])=>void
     deleteModal:number | null
     setDeleteModal:(value:number | null)=>void
+    filter:string
+    setFilter:(value:string)=>void
+    sortedPosts:BlogPost[]
 }
 
 export const BlogContext = createContext<BlogContextType|undefined>(undefined)

@@ -15,6 +15,7 @@ export interface AuthContextType {
     logout:()=>void
     error:string | null
     setError:(value:string | null)=>void
+    updateUser:(name:string, username:string, email:string, avatar:string)=>void
 
 }
 export const AuthContext = createContext<AuthContextType|undefined>(undefined)

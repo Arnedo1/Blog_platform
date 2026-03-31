@@ -4,7 +4,7 @@ import Header from "../components/Header";
 const HomePage = () => {
     return (
         <div>
-            <div>
+            <div className="h-screen bg-white">
                 <Header/>
                 <div className='relative mt-15'>
                     <BlogList/>

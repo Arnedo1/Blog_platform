@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(
     cors({
-        origin: 'http://localhost:5173',
+        origin: 'http://localhost:5174',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type'],
     })
@@ -81,6 +81,8 @@ app.put('/blogs/:id', async (req, res) => {
 // blog deleten met id
 app.delete('/blogs/:id', async (req, res) => {
     const { id } = req.params;
+    await pool.query('DELETE FROM likes WHERE blog_id = $1', [id]);
+    await pool.query('DELETE FROM comments WHERE blog_id = $1', [id]);
     await pool.query('DELETE FROM blogs WHERE id = $1', [id]);
     res.json({ message: 'Blog deleted' });
 });
@@ -88,11 +90,11 @@ app.delete('/blogs/:id', async (req, res) => {
 // user registreren
 app.post('/users', async (req, res) => {
     try {
-        const { name, usersName, avatar, email, password } = req.body;
+        const { name, usersname, avatar, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
         const results = await pool.query(
             'INSERT INTO users (name,username,avatar,email,password) VALUES ($1,$2,$3,$4,$5) RETURNING *',
-            [name, usersName, avatar, email, hashedPassword]
+            [name, usersname, avatar, email, hashedPassword]
         );
         res.json(results.rows[0]);
     } catch (err) {
@@ -152,6 +154,22 @@ app.delete('/comments/:id', async (req, res) => {
     await pool.query('DELETE FROM comments WHERE id = $1', [id]);
     res.json({ message: 'Comment deleted' });
 });
+// Update userdata
+app.put('/users/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, username, email, avatar } = req.body;
+        const results = await pool.query(
+            'UPDATE users SET name = $1, username = $2, email = $3, avatar = $4 WHERE id = $5 RETURNING *',
+            [name, username, email, avatar, id]
+        );
+        delete results.rows[0].password;
+        res.json(results.rows[0]);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 app.listen(3001, () => {
     console.log('Db runs on port 3001');

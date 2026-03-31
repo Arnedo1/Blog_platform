@@ -12,6 +12,7 @@ import NewBlogForm from './pages/NewBlogForm';
 import { BlogContext } from './context/BlogContext';
 import PreviewModal from './components/PreviewModal';
 import ErrorModal from './components/ErrorModal';
+import Settings from './pages/Settings';
 
 const App = () => {
     const auth = useContext(AuthContext);
@@ -22,8 +23,8 @@ const App = () => {
             {auth.menuModal && (
                 <div
                     onClick={() => auth.setMenuModal(false)}
-                    className='fixed inset-0 bg-black/20 z-900'>
-                    <div className='fixed top-15 z-200'>
+                    className='fixed inset-0 bg-black/20 h-screen z-900'>
+                    <div className='fixed top-16 z-200'>
                         <MenuModal />
                     </div>
                 </div>
@@ -32,7 +33,7 @@ const App = () => {
                 <div
                     onClick={() => auth.setLoginModal(false)}
                     className='fixed inset-0 bg-black/20 z-900'>
-                    <div className='fixed top-15 z-200'>
+                    <div className='fixed top-16 z-200'>
                         <LoginModal />
                     </div>
                 </div>
@@ -41,7 +42,7 @@ const App = () => {
                 <div
                     onClick={() => auth.setUserModal(false)}
                     className='fixed inset-0 bg-black/20 z-900'>
-                    <div className='fixed top-15 z-200'>
+                    <div className='fixed top-16 z-200'>
                         <UsersModal />
                     </div>
                 </div>
@@ -53,6 +54,7 @@ const App = () => {
                 </div>
             )}
             {auth.error && <ErrorModal />}
+            <div className='max-w-300 h-full mx-auto bg-white'>
             <Routes>
                 <Route
                     path='/'
@@ -74,7 +76,13 @@ const App = () => {
                     path='/edit_blog'
                     element={<EditForm />}
                 />
+                <Route
+                    path='/instellingen'
+                    element={<Settings />}
+                />
+               
             </Routes>
+            </div>
         </BrowserRouter>
     );
 };

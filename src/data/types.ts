@@ -18,7 +18,7 @@ export interface Author {
 
   export interface User {
     name?: string;
-    usersName?: string;
+    username?: string;
     email?: string;
     avatar?: string;
     posts?:BlogPost[];
@@ -28,7 +28,7 @@ export interface Author {
 export interface UserArrayData {
     id?: number;
     name?: string;
-    usersName?: string;
+    usersname?: string;
     email?: string;
     avatar?: string;
     password?: string;

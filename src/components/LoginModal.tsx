@@ -16,7 +16,7 @@ const LoginModal = () => {
                 className='bg-black/20 h-full w-screen fixed'>
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className='bg-white  h-50 w-[90%] left-1/2 -translate-x-1/2 fixed top-1/2 -translate-y-1/2 rounded-md p-4 flex justify-center flex-col gap-4'>
+                    className='bg-white  h-50 max-w-100 w-[90%] left-1/2 -translate-x-1/2 fixed top-1/2 -translate-y-1/2 rounded-md p-4 flex justify-center flex-col gap-4'>
                     <input
                         placeholder='Email'
                         onChange={(e) => setEmailLogin(e.target.value)}

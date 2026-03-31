@@ -17,6 +17,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
     const [commentContent, setCommentContent] = useState<string>('')
     const [comments, setComments] = useState<BlogComment[]>([])
     const [deleteModal, setDeleteModal] = useState<number | null>(null)
+    const [filter, setFilter] = useState('last')
 
     const auth = useContext(AuthContext);
 
@@ -158,6 +159,12 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             auth?.setError('Er is iets misgegaan, probeer opnieuw.')
         }
     }
+    const sortedPosts = [...blogPostList].sort((a, b) => {
+        if (filter === 'top') {
+            return b.like_count - a.like_count;
+        }
+        return new Date(b.created).getTime() - new Date(a.created).getTime();
+    });
 
     return (
         <BlogContext.Provider
@@ -189,7 +196,10 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
                 setComments,
                 comments,
                 deleteModal,
-                setDeleteModal
+                setDeleteModal,
+                filter,
+                setFilter,
+                sortedPosts
             }}>
             {children}
         </BlogContext.Provider>

@@ -8,7 +8,7 @@ const BlogList = () => {
     return (
         <div className='bg-gray-100'>
             <TopFilter/>
-            {blog?.blogPostList.map((post)=><BlogCard key={post.id} post={post}/>)}
+            {blog?.sortedPosts.map((post)=><BlogCard key={post.id} post={post}/>)}
         </div>
     );
 };

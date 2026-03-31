@@ -2,10 +2,11 @@ import { useContext, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import AvatarBox from "../components/AvatarBox";
 
 interface ErrorData {
     name?: string
-    userName?: string
+    username?: string
     password?: string
     confirmPassword?: string
     email?: string
@@ -17,7 +18,7 @@ const Register = () => {
     const nav = useNavigate()
     const [avatar, setAvatar] = useState('')
     const [name, setName] = useState('')
-    const [usersName, setUsersName] = useState('')
+    const [usersname, setUsersName] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [email, setEmail] = useState('')
@@ -26,7 +27,7 @@ const Register = () => {
     const validate = () => {
         const newError: ErrorData = {}
         if (!name.trim()) newError.name = 'need name'
-        if (!usersName.trim()) newError.userName = 'need usersname'
+        if (!usersname.trim()) newError.username = 'need usersname'
         if (password.trim().length < 8 || password.trim().length > 12) newError.password = 'password needs to be between 8 and 12 characters'
         if (password !== confirmPassword) newError.confirmPassword = 'The passwords need to match'
         if (!email.includes('@')) newError.email = 'Submit a valid email'
@@ -38,16 +39,16 @@ const Register = () => {
 
     const onSubmit = async() => {
         if (validate()) {
-            await auth?.register({name, usersName, email, avatar, password})
+            await auth?.register({name, usersname, email, avatar, password})
             nav('/')
         }
     }
 
     return (
         <div>
-            <div className='p-4'>
-                <div className='flex justify-between items-center'>
-                    <div className='text-xl font-bold mb-7'>
+            <div className=' h-screen bg-white p-4'>
+                <div className='flex justify-between items-center mb-7'>
+                    <div className='text-xl font-bold'>
                         Maak je account
                     </div>
                     <div>
@@ -58,30 +59,7 @@ const Register = () => {
                     </div>
                 </div>
 
-                <div className='text-[18px]'>
-                    <div className='mb-3'>Kies een standaard avatar</div>
-                    {error.avatar && <p className='text-red-500 text-sm mb-2'>{error.avatar}</p>}
-                    <div className='flex gap-4 border mb-4 border-gray-200 rounded-sm py-3 px-5'>
-                        <div onClick={() => setAvatar('1')} className={avatar === '1' ? 'rounded-md bg-gray-200 size-12' : 'bg-white rounded-md size-12'}>
-                            <img className='size-10' src='https://api.dicebear.com/7.x/avataaars/svg?seed=1' alt='' />
-                        </div>
-                        <div onClick={() => setAvatar('2')} className={avatar === '2' ? 'rounded-md bg-gray-200 size-12' : 'bg-white rounded-md size-12'}>
-                            <img className='size-10' src='https://api.dicebear.com/7.x/avataaars/svg?seed=2' alt='' />
-                        </div>
-                        <div onClick={() => setAvatar('3')} className={avatar === '3' ? 'rounded-md bg-gray-200 size-12' : 'bg-white rounded-md size-12'}>
-                            <img className='size-10' src='https://api.dicebear.com/7.x/avataaars/svg?seed=3' alt='' />
-                        </div>
-                        <div onClick={() => setAvatar('4')} className={avatar === '4' ? 'rounded-md bg-gray-200 size-12' : 'bg-white rounded-md size-12'}>
-                            <img className='size-10' src='https://api.dicebear.com/7.x/avataaars/svg?seed=4' alt='' />
-                        </div>
-                        <div onClick={() => setAvatar('5')} className={avatar === '5' ? 'rounded-md bg-gray-200 size-12' : 'bg-white rounded-md size-12'}>
-                            <img className='size-10' src='https://api.dicebear.com/7.x/avataaars/svg?seed=5' alt='' />
-                        </div>
-                        <div onClick={() => setAvatar('6')} className={avatar === '6' ? 'rounded-md bg-gray-200 size-12' : 'bg-white rounded-md size-12'}>
-                            <img className='size-10' src='https://api.dicebear.com/7.x/avataaars/svg?seed=6' alt='' />
-                        </div>
-                    </div>
-                </div>
+                <AvatarBox avatar={avatar} setAvatar={setAvatar} error={error} height={0}/>
                 <div>
                     <div className='flex justify-between'>
                         <div className='text-[18px] mb-2'>
@@ -98,10 +76,10 @@ const Register = () => {
                         <div className='text-[18px] mb-2'>
                             Gebruikersnaam <span className='text-red-600'>*</span>
                         </div>
-                        {error.userName && <p className='text-red-500 text-sm mt-1'>{error.userName}</p>}
+                        {error.username && <p className='text-red-500 text-sm mt-1'>{error.username}</p>}
                     </div>
                     <div>
-                        <input value={usersName} onChange={(e) => setUsersName(e.target.value)} className='border mb-2 pl-2 w-full rounded-sm border-gray-300 h-11' type='text' required />
+                        <input value={usersname} onChange={(e) => setUsersName(e.target.value)} className='border mb-2 pl-2 w-full rounded-sm border-gray-300 h-11' type='text' required />
                     </div>
                 </div>
                 <div>

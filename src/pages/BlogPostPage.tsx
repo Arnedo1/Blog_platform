@@ -29,7 +29,7 @@ const BlogPostPage = () => {
     if (!post) return <div>Blog niet gevonden!</div>;
 
     return (
-        <div>
+        <div className='bg-white h-screen'>
             <Header />
             <div className='flex'>
                 <div className='md:block hidden'>

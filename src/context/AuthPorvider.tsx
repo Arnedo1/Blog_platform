@@ -60,6 +60,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
     }, [currentUser]);
 
+    const updateUser = async (name: string, username: string, email: string, avatar: string) => {
+        try {
+            const res = await fetch(`http://localhost:3001/users/${currentUser?.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, username, email, avatar }),
+            });
+            const updatedUser = await res.json();
+            setCurrentUser(updatedUser);
+        } catch (_error) {
+            setError('Er is iets misgegaan, probeer opnieuw.');
+        }
+    };
+
     return (
         <AuthContext.Provider
             value={{
@@ -76,6 +90,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 logout,
                 error,
                 setError,
+                updateUser
             }}>
             {children}
         </AuthContext.Provider>
