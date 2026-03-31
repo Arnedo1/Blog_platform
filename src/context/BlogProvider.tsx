@@ -6,6 +6,8 @@ import type { BlogPost, BlogComment } from '../data/types';
 import { BlogContext } from './BlogContext';
 import { AuthContext } from './AuthContext';
 
+const API = 'https://blog-platform-vdyb.onrender.com';
+
 export const BlogProvider = ({ children }: { children: ReactNode }) => {
     const [blogPostList, setBlogPostList] = useState<BlogPost[]>([]);
     const [tags, setTags] = useState<string[]>([]);
@@ -24,7 +26,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const res = await fetch('http://localhost:3001/blogs');
+                const res = await fetch(`${API}/blogs`);
                 const data = await res.json();
                 setBlogPostList(data);
             } catch (error) {
@@ -34,11 +36,9 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
         fetchBlogs();
     }, []);
 
-
-
     const postBlog = async () => {
         try {
-            const res = await fetch('http://localhost:3001/blogs', {
+            const res = await fetch(`${API}/blogs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,9 +57,10 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             auth?.setError('Er is iets misgegaan, probeer opnieuw.')
         }
     };
-    const postEdit = async (title: string,content: string,tags: string[],id: number) => {
+
+    const postEdit = async (title: string, content: string, tags: string[], id: number) => {
         try {
-            const res = await fetch(`http://localhost:3001/blogs/${id}`, {
+            const res = await fetch(`${API}/blogs/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
 
     const deleteBlog = async (id: number) => {
         try {
-            await fetch(`http://localhost:3001/blogs/${id}`, {
+            await fetch(`${API}/blogs/${id}`, {
                 method: 'DELETE',
             });
             setBlogPostList(blogPostList.filter((post) => post.id !== id));
@@ -92,7 +93,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
-    const handleEdit = (title: string,content: string,tags: string[],id: number) => {
+    const handleEdit = (title: string, content: string, tags: string[], id: number) => {
         setTitleNewBlog(title);
         setContentNewBlog(content);
         setTags(tags);
@@ -101,43 +102,45 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
 
     const addLike = async (user_id: number, blog_id: number) => {
         try {
-            await fetch('http://localhost:3001/likes', {
+            await fetch(`${API}/likes`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_id, blog_id }),
             });
-            const blogsRes = await fetch('http://localhost:3001/blogs');
+            const blogsRes = await fetch(`${API}/blogs`);
             const data = await blogsRes.json();
             setBlogPostList(data);
         } catch (error) {
             auth?.setError('Er is iets misgegaan, probeer opnieuw.')
         }
     };
+
     const removeLike = async (user_id: number, blog_id: number) => {
         try {
-            await fetch('http://localhost:3001/likes', {
+            await fetch(`${API}/likes`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_id, blog_id }),
             });
-            const blogsRes = await fetch('http://localhost:3001/blogs');
+            const blogsRes = await fetch(`${API}/blogs`);
             const data = await blogsRes.json();
             setBlogPostList(data);
         } catch (error) {
             auth?.setError('Er is iets misgegaan, probeer opnieuw.')
         }
     };
+
     const addComments = async (users_id: number, blog_id: number, content: string) => {
         try {
-            await fetch('http://localhost:3001/comments', {
+            await fetch(`${API}/comments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ users_id, blog_id, content }),
             });
-            const blogsRes = await fetch('http://localhost:3001/blogs');
+            const blogsRes = await fetch(`${API}/blogs`);
             const data = await blogsRes.json();
             setBlogPostList(data);
-            const commentRes = await fetch(`http://localhost:3001/comments/${blog_id}`);
+            const commentRes = await fetch(`${API}/comments/${blog_id}`);
             const commentData = await commentRes.json();
             setComments(commentData);
             setCommentContent('');
@@ -145,20 +148,23 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             auth?.setError('Er is iets misgegaan, probeer opnieuw.');
         }
     };
-    const deleteComments = async(id:number, blog_id:number)=>{
+
+    const deleteComments = async (id: number, blog_id: number) => {
         try {
-            await fetch(`http://localhost:3001/comments/${id}`,{
-                method:'DELETE'})
-                const blogsRes = await fetch('http://localhost:3001/blogs');
-                const data = await blogsRes.json();
-                setBlogPostList(data);
-                const commentRes = await fetch(`http://localhost:3001/comments/${blog_id}`);
-                const commentData = await commentRes.json();
-                setComments(commentData);
+            await fetch(`${API}/comments/${id}`, {
+                method: 'DELETE',
+            });
+            const blogsRes = await fetch(`${API}/blogs`);
+            const data = await blogsRes.json();
+            setBlogPostList(data);
+            const commentRes = await fetch(`${API}/comments/${blog_id}`);
+            const commentData = await commentRes.json();
+            setComments(commentData);
         } catch (error) {
             auth?.setError('Er is iets misgegaan, probeer opnieuw.')
         }
-    }
+    };
+
     const sortedPosts = [...blogPostList].sort((a, b) => {
         if (filter === 'top') {
             return b.like_count - a.like_count;

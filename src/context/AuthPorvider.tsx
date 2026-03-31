@@ -3,6 +3,8 @@ import { useState, useEffect, type ReactNode } from 'react';
 import { AuthContext } from './AuthContext';
 import type { UserArrayData, User } from '../data/types';
 
+const API = 'https://blog-platform-vdyb.onrender.com';
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [userModal, setUserModal] = useState<boolean>(false);
     const [menuModal, setMenuModal] = useState<boolean>(false);
@@ -15,7 +17,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const register = async (userData: UserArrayData) => {
         try {
-            const res = await fetch('http://localhost:3001/users', {
+            const res = await fetch(`${API}/users`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData),
@@ -29,7 +31,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const login = async (password: string, email: string) => {
         try {
-            const res = await fetch('http://localhost:3001/users/login', {
+            const res = await fetch(`${API}/users/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password, email }),
@@ -62,7 +64,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const updateUser = async (name: string, username: string, email: string, avatar: string) => {
         try {
-            const res = await fetch(`http://localhost:3001/users/${currentUser?.id}`, {
+            const res = await fetch(`${API}/users/${currentUser?.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, username, email, avatar }),

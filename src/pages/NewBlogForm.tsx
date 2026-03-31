@@ -37,7 +37,7 @@ const validate = () => {
     }
     const handlePublish = () => {
         if (validate()) {
-            blog.postBlog(blog.titleNewBlog, blog.contentNewBlog, blog.tags, auth.currentUser!.id)
+            blog.postBlog()
             blog.setTitleNewBlog('')
             blog.setContentNewBlog('')
             blog.setTags([])
