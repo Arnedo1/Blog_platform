@@ -17,7 +17,7 @@ const BlogPostPage = () => {
 
     useEffect(() => {
         const fetchComments = async () => {
-            const res = await fetch(`http://localhost:3001/comments/${id}`);
+            const res = await fetch(`https://blog-platform-vdyb.onrender.com/comments/${id}`)
             const data = await res.json();
             blog?.setComments(data);
         };
