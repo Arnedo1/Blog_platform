@@ -32,7 +32,7 @@ const Tiptap = ({ value, onChange, error}: TiptapProps) => {
 
     return (
         <div className='rounded'>
-            <div className='flex gap-2 h-14 bg-gray-100 p-2'>
+            <div className='flex gap-2 h-13 bg-gray-100 p-2'>
                 <button
                     type='button'
                     onMouseDown={(e) => e.preventDefault()}

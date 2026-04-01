@@ -52,14 +52,14 @@ const validate = () => {
                     onClick={() => blog.setTagModal(false)}
                     className='absolute bg-amber-100/0 h-screen w-full z-200'></div>
             )}
-            <div className='flex bg-gray-100 justify-end gap-4 items-center h-15'>
+            <div className='flex bg-gray-100 justify-end gap-4 items-center h-13'>
                 <div 
                 onClick={()=>handlePreview()}
-                className={blog.preview === true ? 'text-gray-600 font-bold cursor-pointer' : 'text-gray-600 font-normal cursor-pointer'}>Preview</div>
+                className={blog.preview === true ? 'text-gray-600 text-[14px] font-bold cursor-pointer' : 'text-gray-600 font-normal cursor-pointer'}>Preview</div>
                 <div>
                     <IoMdClose
                         onClick={() => nav(-1)}
-                        className='size-6 mr-4'
+                        className='size-5 mr-4'
                     />
                 </div>
             </div>
@@ -67,7 +67,7 @@ const validate = () => {
                 <div>
 
                     <input
-                        className='text-3xl text-gray-600 m-4 font-bold placeholder:text-gray-600 focus:outline-none'
+                        className='text-2xl text-gray-600 w-full m-4 font-bold placeholder:text-gray-600 focus:outline-none'
                         placeholder='New post title here...'
                         type='text'
                         onChange={(e)=>blog.setTitleNewBlog(e.target.value)}
@@ -80,7 +80,7 @@ const validate = () => {
                     <div>
                         <input
                             onClick={() => blog.setTagModal(!blog.tagModal)}
-                            className='py-4 focus:outline-none w-full'
+                            className='py-4 focus:outline-none text-[14px] w-full'
                             placeholder='Add up to 3 tags...'
                             type='text'
                             readOnly
@@ -88,7 +88,7 @@ const validate = () => {
                         <div>{error.tags && <p className=' text-red-500 text-sm mt-1'>{error.tags}</p>}</div>
                     </div>
                 </div>
-                <div className='flex gap-2 flex-wrap mb-2'>
+                <div className='flex gap-2 pl-2 flex-wrap mb-2'>
                     {blog.tags.map((tag) => (
                         <span
                             key={tag}
@@ -114,10 +114,10 @@ const validate = () => {
                 />
                 
             </div>
-            <div className='flex fixed bottom-0 w-full bg-gray-100 pl-6 items-center h-15'>
+            <div className='flex fixed bottom-0 max-w-200 w-full bg-gray-100 pl-6 items-center h-14'>
                 <button 
                 onClick={()=>handlePublish()}
-                className='text-white bg-blue-700 shadow-2xl shadow-black-20 rounded-md px-6 py-2'>
+                className='text-white bg-blue-700 text-[16px] shadow-2xl shadow-black-20 rounded-md px-4 py-1.5'>
                     Publish
                 </button>
             </div>

@@ -8,7 +8,7 @@ const Header = () => {
     const auth = useContext(AuthContext);
     if (!auth) return null
     return (
-        <div className='flex py-4 fixed max-w-300 w-full top-0 z-20 bg-white justify-between px-4 shadow shadow-black/20'>
+        <div className='flex py-3 fixed max-w-200 w-full top-0 z-20 bg-white justify-between px-4 shadow shadow-black/20'>
             <div className='flex gap-4'>
                 <div>
                     <RxHamburgerMenu

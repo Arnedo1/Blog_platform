@@ -11,8 +11,8 @@ const PreviewModal = () => {
     if (!blog || !auth) return null;
     if (!auth.currentUser) return null;
     return (
-        <div className='bg-white'>
-            <div className='flex bg-gray-100 justify-end gap-4 items-center h-15'>
+        <div className='bg-white max-w-200 mx-auto w-full'>
+            <div className='flex bg-gray-100 justify-end gap-4 items-center h-13'>
                 <div
                     onClick={() => blog.setPreview(true)}
                     className={
@@ -26,7 +26,7 @@ const PreviewModal = () => {
                 <div>
                     <IoMdClose
                         onClick={() => blog.setPreview(false)}
-                        className='size-6 mr-4'
+                        className='size-5 mr-4'
                     />
                 </div>
             </div>

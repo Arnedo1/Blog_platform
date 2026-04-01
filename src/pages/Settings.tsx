@@ -34,21 +34,21 @@ const Settings = () => {
             <div className='flex justify-end items-center'>
                 <button
                     onClick={() => profilEdit === true? handleSave() : setProfilEdit(true)}
-                    className='bg-gray-800 hover:bg-gray-700 px-4 text-white rounded-lg py-2 text-sm transition-colors'>
+                    className='bg-gray-800 hover:bg-gray-700 px-2 text-white rounded-lg py-1.5 text-sm transition-colors'>
                     {profilEdit ? 'Opslaan' : 'Bewerk profiel'}
                 </button>
             </div>
             <div className='flex justify-center mt-10'>
-                <div className='h-30 w-30 flex justify-center pt-2 rounded-full bg-gray-200'>
+                <div className='h-25 w-25 flex justify-center pt-2 rounded-full bg-gray-200'>
                     <img
-                        className='size-20'
+                        className='size-18'
                         src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${profilEdit ? editAvatar : auth.currentUser?.avatar}`}
                         alt=''
                     />
                 </div>
             </div>
             <div className='flex justify-center'>
-            <div className='w-100'>
+            <div className='w-90'>
             {profilEdit && (
                 <AvatarBox
                     height={20}
@@ -59,7 +59,7 @@ const Settings = () => {
             )}
             </div>
             </div>
-            <div className='text-xl gap-4 text-gray-800 font-semibold flex flex-col items-center mt-10'>
+            <div className='text-[17px] gap-2 text-gray-800 font-semibold flex flex-col items-center mt-6'>
                 <div className='flex flex-col items-center'>
                     <div>Naam</div>
                     {profilEdit ? (
@@ -97,7 +97,7 @@ const Settings = () => {
                     )}
                 </div>
             </div>
-            <div className='mt-10'>
+            <div className='mt-8'>
                 {userPosts.map((post) => (
                     <BlogCard key={post.id} post={post} />
                 ))}

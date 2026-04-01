@@ -24,7 +24,7 @@ const App = () => {
                 <div
                     onClick={() => auth.setMenuModal(false)}
                     className='fixed inset-0 bg-black/20 h-screen z-900'>
-                    <div className='fixed top-16 z-200'>
+                    <div className='fixed z-200'>
                         <MenuModal />
                     </div>
                 </div>
@@ -42,19 +42,19 @@ const App = () => {
                 <div
                     onClick={() => auth.setUserModal(false)}
                     className='fixed inset-0 bg-black/20 z-900'>
-                    <div className='fixed top-16 z-200'>
+                    <div className='fixed z-200'>
                         <UsersModal />
                     </div>
                 </div>
             )}
 
             {blog.preview && (
-                <div className='h-screen w-full z-200'>
+                <div className=' fixed h-screen w-full z-200'>
                     <PreviewModal />
                 </div>
             )}
             {auth.error && <ErrorModal />}
-            <div className='max-w-300 h-full mx-auto bg-white'>
+            <div className='max-w-200 h-full mx-auto bg-white'>
             <Routes>
                 <Route
                     path='/'

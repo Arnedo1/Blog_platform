@@ -16,28 +16,28 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
 
     return (
         
-            <div className='shadow flex flex-col shadow-black/20 bg-white mb-3 mx-1 py-6 px-4'>
+            <div className='shadow flex flex-col shadow-black/20 bg-white mb-3 mx-1 py-4 px-4'>
                 <div className='flex gap-4'>
                     <div>
                         <img
-                            className='size-10 rounded-full'
+                            className='size-8 rounded-full'
                             src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${post.avatar}`}
                         />
                     </div>
                     <div>
                         <div>{post.name}</div>
-                        <div className='text-[12px]'>
+                        <div className='text-[10px]'>
                             {new Date(post.created).toLocaleDateString()}
                         </div>
                     </div>
                 </div>
                 <Link to={`/blogpost/${post.id}`}>
-                <div className='font-bold hover:text-purple-900 cursor-pointer text-lg my-2'>
+                <div className='font-bold hover:text-purple-900 cursor-pointer text-l my-1'>
                     {post.title}
                 </div>
 
                 </Link>
-                <div className='flex gap-4 mb-4 text-[14px] text-gray-500'></div>
+                <div className='flex gap-4 mb-2 text-[14px] text-gray-500'></div>
                 <div className='flex justify-between gap-4'>
                     <div className='flex gap-4'>
                         <div className='flex gap-1 cursor-pointer'>

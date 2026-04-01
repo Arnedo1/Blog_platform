@@ -6,7 +6,7 @@ const TopFilter = () => {
     if(!blog)return null
     
     return (
-        <div className='bg-gray-100 h-15 items-center gap-4 px-4 text-[18px] text-gray-600 flex'>
+        <div className='bg-gray-100 h-12 items-center gap-4 px-4 text-[16px] text-gray-600 flex'>
             <p 
             onClick={()=>blog.setFilter('last')}
             className={blog.filter === 'last' ? 'w-20 font-bold cursor-pointer' : 'w-20 font-normal cursor-pointer'}>Laatste</p>

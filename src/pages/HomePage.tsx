@@ -6,7 +6,7 @@ const HomePage = () => {
         <div>
             <div className="h-screen bg-white">
                 <Header/>
-                <div className='relative mt-15'>
+                <div className='relative mt-14'>
                     <BlogList/>
                 </div>
             </div>
