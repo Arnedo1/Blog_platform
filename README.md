@@ -74,6 +74,4 @@ CREATE TABLE comments (
 );
 ```
 
-## Live Demo
-
-Coming soon
+[Live Demo](https://blog-platform-1-94qc.onrender.com/)
