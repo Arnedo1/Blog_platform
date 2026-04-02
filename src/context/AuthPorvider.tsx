@@ -75,6 +75,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setError('Er is iets misgegaan, probeer opnieuw.');
         }
     };
+    const uploadAvatar = async (file: File): Promise<string> => {
+        const formData = new FormData()
+        formData.append('avatar', file)
+        
+        const res = await fetch('https://blog-platform-vdyb.onrender.com/upload', {
+            method: 'POST',
+            body: formData,
+        })
+        const data = await res.json()
+        return data.url
+    }
 
     return (
         <AuthContext.Provider
@@ -92,7 +103,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 logout,
                 error,
                 setError,
-                updateUser
+                updateUser,
+                uploadAvatar
             }}>
             {children}
         </AuthContext.Provider>
