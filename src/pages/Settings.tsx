@@ -41,24 +41,19 @@ const Settings = () => {
             </div>
 
             <div className='flex justify-center mt-10'>
-                <div className='relative'>
-                    <img
-                        className='size-24 rounded-full object-cover'
-                        src={profilEdit ? editAvatar : auth.currentUser?.avatar ?? ''}
-                        alt='avatar'
-                    />
-                    {profilEdit && (
-                        <label className='absolute bottom-0 right-0 cursor-pointer bg-gray-800 text-white rounded-full p-1.5'>
-                            ✏️
-                            <input
-                                type='file'
-                                accept='image/*'
-                                onChange={handleAvatarUpload}
-                                className='hidden'
-                            />
-                        </label>
-                    )}
-                </div>
+            <div className='relative group'>
+    <img
+        className='size-24 rounded-full object-cover'
+        src={profilEdit ? editAvatar : auth.currentUser?.avatar ?? ''}
+        alt='avatar'
+    />
+    {profilEdit && (
+        <label className='absolute inset-0 rounded-full cursor-pointer bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity'>
+            <span className='text-white text-xs'>Wijzig</span>
+            <input type='file' accept='image/*' onChange={handleAvatarUpload} className='hidden' />
+        </label>
+    )}
+</div>
             </div>
 
             <div className='text-[17px] gap-2 text-gray-800 font-semibold flex flex-col items-center mt-6'>
