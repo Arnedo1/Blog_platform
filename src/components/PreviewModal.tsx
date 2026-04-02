@@ -35,7 +35,7 @@ const PreviewModal = () => {
                     <div>
                         <img
                             className='size-10 rounded-full'
-                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${auth?.currentUser?.avatar}`}
+                            src={auth?.currentUser?.avatar}
                             alt='avatar'
                         />
                     </div>
