@@ -48,11 +48,11 @@ const App = () => {
                 </div>
             )}
 
-            {blog.preview && (
-                <div className=' fixed h-screen w-full z-200'>
-                    <PreviewModal />
-                </div>
-            )}
+{blog.preview && (
+    <div className='fixed inset-0 z-200 overflow-y-auto bg-white'>
+        <PreviewModal />
+    </div>
+)}
             {auth.error && <ErrorModal />}
             <div className='max-w-200 h-full mx-auto bg-white'>
             <Routes>

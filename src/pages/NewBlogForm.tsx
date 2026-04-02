@@ -6,44 +6,48 @@ import { useContext, useState } from 'react';
 import Tiptap from '../components/Tiptap';
 import { AuthContext } from '../context/AuthContext';
 
-interface ErrorData{
-    title?:string
-    content?:string
-    tags?:string
+interface ErrorData {
+    title?: string;
+    content?: string;
+    tags?: string;
 }
 
 const NewBlogForm = () => {
     const nav = useNavigate();
     const blog = useContext(BlogContext);
-    const auth = useContext(AuthContext)
-    const [error, setError] = useState<ErrorData>({})
-    if (!blog)return null
-    if(!auth)return null
+    const auth = useContext(AuthContext);
+    const [error, setError] = useState<ErrorData>({});
+    if (!blog) return null;
+    if (!auth) return null;
 
-
-
-const validate = () => {
-    const newError : ErrorData = {}
-    if(!blog.titleNewBlog.trim()){newError.title = 'You need to write a title'}
-    if(blog.tags.length === 0){newError.tags = 'You need to choose at least 1 tag'}
-    if(!blog.contentNewBlog.trim()){newError.content = 'You need to write a text'}
-    setError(newError)
-    return Object.keys(newError).length === 0
-    }
+    const validate = () => {
+        const newError: ErrorData = {};
+        if (!blog.titleNewBlog.trim()) {
+            newError.title = 'You need to write a title';
+        }
+        if (blog.tags.length === 0) {
+            newError.tags = 'You need to choose at least 1 tag';
+        }
+        if (!blog.contentNewBlog.trim()) {
+            newError.content = 'You need to write a text';
+        }
+        setError(newError);
+        return Object.keys(newError).length === 0;
+    };
     const handlePreview = () => {
         if (validate()) {
-            blog.setPreview(true)
+            blog.setPreview(true);
         }
-    }
+    };
     const handlePublish = () => {
         if (validate()) {
-            blog.postBlog()
-            blog.setTitleNewBlog('')
-            blog.setContentNewBlog('')
-            blog.setTags([])
-            nav('/')
+            blog.postBlog();
+            blog.setTitleNewBlog('');
+            blog.setContentNewBlog('');
+            blog.setTags([]);
+            nav('/');
         }
-    }
+    };
 
     return (
         <div className=''>
@@ -53,9 +57,15 @@ const validate = () => {
                     className='absolute bg-amber-100/0 h-screen w-full z-200'></div>
             )}
             <div className='flex bg-gray-100 justify-end gap-4 items-center h-13'>
-                <div 
-                onClick={()=>handlePreview()}
-                className={blog.preview === true ? 'text-gray-600 text-[14px] font-bold cursor-pointer' : 'text-gray-600 font-normal cursor-pointer'}>Preview</div>
+                <div
+                    onClick={() => handlePreview()}
+                    className={
+                        blog.preview === true
+                            ? 'text-gray-600 text-[14px] font-bold cursor-pointer'
+                            : 'text-gray-600 font-normal cursor-pointer'
+                    }>
+                    Preview
+                </div>
                 <div>
                     <IoMdClose
                         onClick={() => nav(-1)}
@@ -65,27 +75,37 @@ const validate = () => {
             </div>
             <div>
                 <div>
-
                     <input
-                        className='text-2xl text-gray-600 w-full m-4 font-bold placeholder:text-gray-600 focus:outline-none'
+                        className='text-2xl text-gray-600 max-w-190 w-full m-4 font-bold placeholder:text-gray-600 focus:outline-none'
                         placeholder='New post title here...'
                         type='text'
-                        onChange={(e)=>blog.setTitleNewBlog(e.target.value)}
+                        onChange={(e) => blog.setTitleNewBlog(e.target.value)}
                         value={blog.titleNewBlog}
-
                     />
-                    <div>{error.title && <p className='text-red-500 ml-4 text-sm mt-1'>{error.title}</p>}</div>
+                    <div>
+                        {error.title && (
+                            <p className='text-red-500 ml-4 text-sm mt-1'>
+                                {error.title}
+                            </p>
+                        )}
+                    </div>
                 </div>
                 <div className='px-4'>
                     <div>
                         <input
                             onClick={() => blog.setTagModal(!blog.tagModal)}
-                            className='py-4 focus:outline-none text-[14px] w-full'
+                            className='py-4 focus:outline-none text-[14px] max-w-200'
                             placeholder='Add up to 3 tags...'
                             type='text'
                             readOnly
                         />
-                        <div>{error.tags && <p className=' text-red-500 text-sm mt-1'>{error.tags}</p>}</div>
+                        <div>
+                            {error.tags && (
+                                <p className=' text-red-500 text-sm mt-1'>
+                                    {error.tags}
+                                </p>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div className='flex gap-2 pl-2 flex-wrap mb-2'>
@@ -105,19 +125,19 @@ const validate = () => {
                         </span>
                     ))}
                 </div>
-
-                {blog.tagModal && <TagArrayModal />}
-                <Tiptap
-                    value={blog.contentNewBlog}
-                    onChange={(content) => blog.setContentNewBlog(content)}
-                    error={error}
-                />
-                
+                <div className='overflow-y-scroll'>
+                    {blog.tagModal && <TagArrayModal />}
+                    <Tiptap
+                        value={blog.contentNewBlog}
+                        onChange={(content) => blog.setContentNewBlog(content)}
+                        error={error}
+                    />
+                </div>
             </div>
-            <div className='flex fixed bottom-0 max-w-200 w-full bg-gray-100 pl-6 items-center h-14'>
-                <button 
-                onClick={()=>handlePublish()}
-                className='text-white bg-blue-700 text-[16px] shadow-2xl shadow-black-20 rounded-md px-4 py-1.5'>
+            <div className='flex fixed bottom-0 max-w-200 z-1000 w-full bg-gray-100 pl-6 items-center h-14'>
+                <button
+                    onClick={() => handlePublish()}
+                    className='text-white bg-blue-700 text-[16px] shadow-2xl shadow-black-20 rounded-md px-4 py-1.5'>
                     Publish
                 </button>
             </div>

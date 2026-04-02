@@ -95,7 +95,7 @@ const Tiptap = ({ value, onChange, error}: TiptapProps) => {
 
             <EditorContent
                 editor={editor}
-                 className='p-4 h-134 overflow-y-auto 
+                 className='p-4 overflow-y-auto mb-15
                 [&_.ProseMirror]:focus:outline-none
                 [&_.ProseMirror_h1]:text-3xl 
                 [&_.ProseMirror_h1]:font-bold

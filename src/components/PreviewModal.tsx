@@ -74,6 +74,7 @@ const PreviewModal = () => {
                         __html: blog.contentNewBlog ?? '',
                     }}
                     className='
+                    p-4 overflow-y-auto
                     [&_p]:mt-1
                     [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-4
                     [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-3
@@ -81,6 +82,7 @@ const PreviewModal = () => {
                     [&_ul]:list-disc [&_ul]:pl-5
                     [&_strong]:font-bold
                     [&_em]:italic
+                    
                 '
                 />
             </div>
