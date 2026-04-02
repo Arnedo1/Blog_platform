@@ -32,7 +32,7 @@ const Header = () => {
                         <img
                             onClick={()=>(auth.setUserModal(true), auth.setMenuModal(false), auth.setLoginModal(false))}
                             className='rounded-full size-8 mr-2'
-                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${auth.currentUser.avatar}`}
+                            src={auth.currentUser.avatar}
                         />
                     </div>
                 ) : (

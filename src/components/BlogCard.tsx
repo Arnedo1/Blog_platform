@@ -21,7 +21,7 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
                     <div>
                         <img
                             className='size-8 rounded-full'
-                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${post.avatar}`}
+                            src={post.avatar}
                         />
                     </div>
                     <div>
