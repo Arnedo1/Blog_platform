@@ -17,7 +17,7 @@ const CommentList = ({post}:{post:BlogPost}) => {
             </div>
             <div className='flex px-4 my-4 gap-2 items-start'>
                 <img
-                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${auth.currentUser.avatar}`}
+                    src={auth.currentUser.avatar}
                     alt='Logo'
                     className='w-10 rounded-full'
                 />

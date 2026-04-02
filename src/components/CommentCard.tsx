@@ -13,7 +13,7 @@ const CommentCard = ({ comment }: { comment: BlogComment }) => {
         <div className='p-4 mt-3 flex gap-2'>
             <div>
                 <img
-                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${comment.avatar}`}
+                    src={comment.avatar}
                     alt='Logo'
                     className='w-10 rounded-full'
                 />

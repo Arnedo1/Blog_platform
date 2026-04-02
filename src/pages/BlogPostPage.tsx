@@ -66,7 +66,7 @@ const BlogPostPage = () => {
                             <div>
                                 <img
                                     className='size-10 rounded-full'
-                                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${post.avatar}`}
+                                    src={post.avatar}
                                     alt='avatar'
                                 />
                             </div>
