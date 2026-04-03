@@ -17,6 +17,8 @@ export interface AuthContextType {
     setError:(value:string | null)=>void
     updateUser:(name:string, username:string, email:string, avatar:string)=>void
     uploadAvatar: (file: File) => Promise<string>
+    loginError:string | null
+    setLoginError:(value:string | null)=>void
 
 }
 export const AuthContext = createContext<AuthContextType|undefined>(undefined)

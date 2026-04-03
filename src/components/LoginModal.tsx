@@ -19,7 +19,7 @@ const LoginModal = () => {
                 className='bg-black/20 h-full w-screen fixed'>
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className='bg-white  h-50 max-w-100 w-[90%] left-1/2 -translate-x-1/2 fixed top-1/2 -translate-y-1/2 rounded-md p-4 flex justify-center flex-col gap-4'>
+                    className='bg-white max-w-100 w-[90%] left-1/2 -translate-x-1/2 fixed top-1/2 -translate-y-1/2 rounded-md p-4 flex justify-center flex-col'>
                     <input
                         placeholder='Email'
                         onChange={(e) => setEmailLogin(e.target.value)}
@@ -31,12 +31,12 @@ const LoginModal = () => {
                             auth?.login(passwordLogin, emailLogin)
                         }
                     />
-                    <div className='border mb-2 flex justify-between w-full rounded-sm border-gray-300 h-10'>
+                    <div className='border my-2 flex  justify-between w-full rounded-sm border-gray-300 h-10'>
                         <input
                             placeholder='Paswoord'
                             onChange={(e) => setPasswordLogin(e.target.value)}
                             value={passwordLogin}
-                            className='focus:outline-none pl-2  w-full'
+                            className='focus:outline-none pl-2 w-full'
                             type={passwordVisable ? 'text' : 'password'}
                             onKeyDown={(e) =>
                                 e.key === 'Enter' &&
@@ -58,10 +58,10 @@ const LoginModal = () => {
                             />}
                         </div>
                     </div>
-
+                    {auth.loginError && <p className='text-red-500 text-sm mt-1'>{auth.loginError}</p>}
                     <button
                         onClick={() => auth?.login(passwordLogin, emailLogin)}
-                        className='bg-blue-700 h-10 w-30 mx-auto rounded-sm text-white px-4'>
+                        className='bg-blue-700 mt-2 h-10 w-30 mx-auto rounded-sm text-white px-4'>
                         Login
                     </button>
                 </div>

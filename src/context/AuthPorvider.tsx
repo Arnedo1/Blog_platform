@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [menuModal, setMenuModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [loginError, setLoginError] = useState<string|null>(null)
     const [currentUser, setCurrentUser] = useState<User | null>(() => {
         const saved = localStorage.getItem('currentUser');
         return saved ? JSON.parse(saved) : null;
@@ -37,8 +38,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 body: JSON.stringify({ password, email }),
             });
             const user = await res.json();
-            setCurrentUser(user);
-            setLoginModal(false);
+            if (res.ok) {
+                setCurrentUser(user);
+                setLoginModal(false);
+                setLoginError(null)
+            } else {
+                setLoginError(user.message);
+            }
         } catch (error) {
             setError('Er is iets misgegaan, probeer opnieuw.');
         }
@@ -104,7 +110,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 error,
                 setError,
                 updateUser,
-                uploadAvatar
+                uploadAvatar,
+                loginError,
+                setLoginError
             }}>
             {children}
         </AuthContext.Provider>

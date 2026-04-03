@@ -7,7 +7,7 @@ const ErrorModal = () => {
     if (!auth) return null
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-400">
+        <div className="fixed inset-0 flex items-center justify-center z-1000">
             <div className="rounded-xl flex flex-col gap-4 p-6 w-72 shadow-lg bg-white border border-gray-100">
                 <div className="flex justify-between items-start">
                     <div className="flex items-center gap-2">
