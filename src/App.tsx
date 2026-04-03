@@ -33,7 +33,7 @@ const App = () => {
                 <div
                     onClick={() => auth.setLoginModal(false)}
                     className='fixed inset-0 bg-black/20 z-900'>
-                    <div className='fixed top-16 z-200'>
+                    <div className='fixed z-200'>
                         <LoginModal />
                     </div>
                 </div>

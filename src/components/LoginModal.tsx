@@ -31,19 +31,19 @@ const LoginModal = () => {
                             auth?.login(passwordLogin, emailLogin)
                         }
                     />
-                    <div className='border mb-2 flex justify-between pl-2 w-full rounded-sm border-gray-300 h-10'>
+                    <div className='border mb-2 flex justify-between w-full rounded-sm border-gray-300 h-10'>
                         <input
                             placeholder='Paswoord'
                             onChange={(e) => setPasswordLogin(e.target.value)}
                             value={passwordLogin}
-                            className='focus:outline-none w-full'
+                            className='focus:outline-none pl-2  w-full'
                             type={passwordVisable ? 'text' : 'password'}
                             onKeyDown={(e) =>
                                 e.key === 'Enter' &&
                                 auth?.login(passwordLogin, emailLogin)
                             }
                         />
-                        <div className=' items-center flex mr-4'>
+                        <div className=' items-center flex w-10 justify-center'>
                             {passwordVisable === false ? <LuEye
                                 className='size-5 text-gray-500 '
                                 onClick={() =>
