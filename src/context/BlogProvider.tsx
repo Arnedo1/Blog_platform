@@ -47,7 +47,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
                     title: titleNewBlog,
                     content: contentNewBlog,
                     user_id: auth?.currentUser?.id,
-                    read_time: Math.ceil(contentNewBlog.length / 200),
+                    read_time: Math.ceil(contentNewBlog.split(' ').length / 200),
                     tags: tags,
                 }),
             });
@@ -69,7 +69,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
                     title,
                     content,
                     user_id: auth?.currentUser?.id,
-                    read_time: Math.ceil(content.length / 200),
+                    read_time: Math.ceil(content.split(' ').length / 200),
                     tags,
                 }),
             });

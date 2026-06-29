@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
-import HomePage from './pages/HomePage';
+import HomePage from './context/HomePage';
 import EditForm from './pages/EditForm';
 import BlogPostPage from './pages/BlogPostPage';
 import { useContext } from 'react';
