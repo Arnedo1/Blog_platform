@@ -26,6 +26,11 @@ app.use(
     })
 );
 
+// base route ok
+app.get('/', (req, res) => {
+    res.send('OK')
+})
+
 // alle blogs ophalen
 app.get('/blogs', async (req, res) => {
     try {
